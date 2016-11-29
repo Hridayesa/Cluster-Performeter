@@ -1,0 +1,49 @@
+allprojects{
+  apply plugin: 'idea'
+}
+
+subprojects {
+
+  buildscript {
+      ext {
+          springBootVersion = '1.4.2.RELEASE'
+      }
+      repositories {
+          jcenter()
+          maven { url "http://repo.spring.io/snapshot" }
+          maven { url "http://repo.spring.io/milestone" }
+      }
+      dependencies {
+          classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+      }
+  }
+
+  apply plugin: 'java'
+  //apply plugin: 'org.springframework.boot'
+
+  idea{
+      module{
+          downloadJavadoc = true
+          downloadSources = true
+      }
+  }
+
+  sourceCompatibility = 1.8
+
+  repositories {
+      jcenter()
+  //    mavenLocal()
+  }
+
+  dependencies {
+      compile "com.hazelcast:hazelcast:+"
+      compile "com.hazelcast:hazelcast-spring:+"
+      compile "org.springframework.boot:spring-boot-starter-web:1.4.2.RELEASE"
+
+      compile "ch.qos.logback:logback-classic:1.1.7"
+      compile "org.slf4j:slf4j-api:1.7.21"
+
+      testCompile "junit:junit:4.12"
+      testCompile "org.springframework:spring-test:4.2.1.RELEASE"
+  }
+}

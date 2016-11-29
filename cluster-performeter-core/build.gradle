@@ -1,0 +1,7 @@
+group 'org.vs.performeter'
+/*name 'cluster-performeter'*/
+version '1.0-SNAPSHOT'
+
+dependencies {
+}
+

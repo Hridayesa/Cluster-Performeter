@@ -1,0 +1,9 @@
+group 'org.vs.performeter'
+version '1.0-SNAPSHOT'
+
+dependencies {
+    compile project(':cluster-performeter-core')
+}
+
+// Генерация дистрибутива
+// два набора запускающих скриптов
