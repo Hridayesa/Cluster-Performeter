@@ -7,7 +7,7 @@
 //import org.junit.runner.RunWith;
 //import org.springframework.test.context.ContextConfiguration;
 //import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-//import org.vs.performeter.container.TestContainer;
+//import TestContainer;
 //
 //import javax.annotation.Resource;
 //

@@ -1,9 +1,10 @@
-package org.vs.performeter.hzcache;
+package org.vs.performeter.hzcache.runner;
 
 import com.hazelcast.core.IMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.vs.performeter.common.Analyser;
+import org.springframework.stereotype.Component;
+import org.vs.performeter.core.common.Analyser;
 
 import javax.annotation.Resource;
 import java.util.Map;
@@ -12,6 +13,7 @@ import java.util.Set;
 /**
  * Created by karpovdc on 07.09.2015.
  */
+@Component
 public class HazelcastCacheTestAnalyser implements Analyser{
     private static Logger LOG = LoggerFactory.getLogger(HazelcastCacheTestAnalyser.class);
 
@@ -23,4 +25,5 @@ public class HazelcastCacheTestAnalyser implements Analyser{
                 entry -> LOG.info("### "+entry.getKey() + "/" + entry.getValue())
         );
     }
+
 }

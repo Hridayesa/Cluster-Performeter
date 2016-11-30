@@ -1,4 +1,4 @@
-package org.vs.performeter;
+package org.vs.performeter.core;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -14,7 +14,7 @@ import java.util.stream.IntStream;
  * Created by karpovdc on 11.09.2015.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "/tmp.xml" })
+@ContextConfiguration(locations = {"/tmp.xml"})
 public class ExecutorTest {
     @Resource private SchedulingTaskExecutor taskExecutor;
     @Test

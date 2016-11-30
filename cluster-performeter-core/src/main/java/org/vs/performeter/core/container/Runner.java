@@ -1,13 +1,16 @@
-package org.vs.performeter.container;
+package org.vs.performeter.core.container;
 
 import com.hazelcast.core.ICountDownLatch;
 import com.hazelcast.core.IMap;
 import com.hazelcast.core.ITopic;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.vs.performeter.common.ContextEnum;
-import org.vs.performeter.common.Analyser;
-import org.vs.performeter.common.MessageType;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.stereotype.Component;
+import org.vs.performeter.core.common.Analyser;
+import org.vs.performeter.core.common.ContextEnum;
+import org.vs.performeter.core.common.MessageType;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
@@ -16,7 +19,9 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by karpovdc on 07.09.2015.
  */
-public class Runner{
+@Component
+@ConditionalOnBean(type = {"org.vs.performeter.hzcache.runner.RunnerMain"})
+public class Runner implements Runnable{
     private static Logger LOG = LoggerFactory.getLogger(Runner.class);
 
     @Resource private IMap context;
@@ -24,32 +29,14 @@ public class Runner{
     @Resource private ITopic<MessageType> topic;
     @Resource private ICountDownLatch finishCollectionLatch;
 
+    @Value("${testDurationSeconds}")
     private Integer seconds;
 
     public Integer getSeconds() {
         return seconds;
     }
-
     public void setSeconds(Integer seconds) {
         this.seconds = seconds;
-    }
-
-    @PostConstruct
-    public void start() throws InterruptedException {
-        LOG.info("READY !!!");
-        if ( init() ) {
-
-            topic.publish(MessageType.START);
-            LOG.info("STARTED !!!");
-            Thread.sleep(1000 * seconds);
-
-            topic.publish(MessageType.STOP);
-            LOG.info("STOPED !!!");
-
-            doAnalysis();
-            LOG.info("DONE !!!");
-            topic.publish(MessageType.EXIT);
-        }
     }
 
     private boolean init() {
@@ -65,5 +52,26 @@ public class Runner{
         finishCollectionLatch.await(10, TimeUnit.SECONDS);
         LOG.info("Do analysis");
         analyser.analyse();
+    }
+
+    @Override
+    public void run() {
+        LOG.info("READY !!!");
+        if ( init() ) {
+            try {
+                topic.publish(MessageType.START);
+                LOG.info("STARTED !!!");
+                Thread.sleep(1000 * seconds);
+
+                topic.publish(MessageType.STOP);
+                LOG.info("STOPED !!!");
+
+                doAnalysis();
+                LOG.info("DONE !!!");
+                topic.publish(MessageType.EXIT);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

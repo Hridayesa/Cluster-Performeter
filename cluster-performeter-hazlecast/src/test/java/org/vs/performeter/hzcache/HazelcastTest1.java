@@ -1,4 +1,4 @@
-package org.vs.performeter;
+package org.vs.performeter.hzcache;
 
 import static org.junit.Assert.*;
 

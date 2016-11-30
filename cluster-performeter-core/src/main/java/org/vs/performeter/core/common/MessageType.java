@@ -1,4 +1,4 @@
-package org.vs.performeter.common;
+package org.vs.performeter.core.common;
 
 /**
  * Created by karpovdc on 10.09.2015.

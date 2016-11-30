@@ -1,4 +1,4 @@
-package org.vs.performeter.common;
+package org.vs.performeter.core.common;
 
 import java.io.Serializable;
 

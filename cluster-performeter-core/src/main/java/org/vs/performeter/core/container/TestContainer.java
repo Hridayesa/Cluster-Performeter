@@ -1,24 +1,27 @@
-package org.vs.performeter.container;
+package org.vs.performeter.core.container;
 
 import com.hazelcast.core.ICountDownLatch;
 import com.hazelcast.core.IMap;
 import com.hazelcast.core.ITopic;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.scheduling.SchedulingTaskExecutor;
-import org.vs.performeter.common.ContextEnum;
-import org.vs.performeter.common.Statistics;
-import org.vs.performeter.common.Tester;
-import org.vs.performeter.common.MessageType;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.stereotype.Component;
+import org.vs.performeter.core.common.ContextEnum;
+import org.vs.performeter.core.common.MessageType;
+import org.vs.performeter.core.common.Statistics;
+import org.vs.performeter.core.common.Tester;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
+import java.util.concurrent.Executor;
 
 /**
  * Created by karpovdc on 07.09.2015.
  */
-
-public class TestContainer {
+@Component
+@ConditionalOnBean(type = "org.vs.performeter.hzcache.tester.TesterMain")
+public class TestContainer implements Runnable {
     private static Logger LOG = LoggerFactory.getLogger(TestContainer.class);
     private int id;
 
@@ -26,15 +29,14 @@ public class TestContainer {
     @Resource private ITopic<MessageType> topic;
     @Resource private IMap statisticsMap;
     @Resource private ICountDownLatch finishCollectionLatch;
-    @Resource private SchedulingTaskExecutor taskExecutor;
+    @Resource private Executor taskExecutor;
     @Resource private Tester tester;
 
     private volatile boolean stopped = false;
 
     private Statistics statistics = new Statistics(0L,0L);
 
-    @PostConstruct
-    public void register(){
+    public void run(){
         context.lock(ContextEnum.TESTERS_COUNT);
         try {
             Integer count = (Integer) context.get(ContextEnum.TESTERS_COUNT);

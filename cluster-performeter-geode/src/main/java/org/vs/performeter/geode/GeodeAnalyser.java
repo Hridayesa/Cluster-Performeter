@@ -3,7 +3,7 @@ package org.vs.performeter.geode;
 import com.hazelcast.core.IMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.vs.performeter.common.Analyser;
+import org.vs.performeter.core.common.Analyser;
 
 import javax.annotation.Resource;
 import java.util.Map;

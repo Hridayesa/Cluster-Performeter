@@ -5,7 +5,7 @@ import org.apache.geode.cache.Region;
 import org.apache.geode.cache.client.ClientCache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.vs.performeter.common.Tester;
+import org.vs.performeter.core.common.Tester;
 
 import javax.annotation.Resource;
 import java.util.Random;

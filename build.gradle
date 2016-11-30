@@ -38,7 +38,7 @@ subprojects {
   dependencies {
       compile "com.hazelcast:hazelcast:+"
       compile "com.hazelcast:hazelcast-spring:+"
-      compile "org.springframework.boot:spring-boot-starter-web:1.4.2.RELEASE"
+      compile "org.springframework.boot:spring-boot-starter:1.4.2.RELEASE"
 
       compile "ch.qos.logback:logback-classic:1.1.7"
       compile "org.slf4j:slf4j-api:1.7.21"

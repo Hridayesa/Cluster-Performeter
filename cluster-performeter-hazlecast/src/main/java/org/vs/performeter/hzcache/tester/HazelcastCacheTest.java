@@ -1,7 +1,9 @@
-package org.vs.performeter.hzcache;
+package org.vs.performeter.hzcache.tester;
 
 import com.hazelcast.core.IMap;
-import org.vs.performeter.common.Tester;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+import org.vs.performeter.core.common.Tester;
 
 import javax.annotation.Resource;
 import java.util.Random;
@@ -9,15 +11,16 @@ import java.util.Random;
 /**
  * Created by karpovdc on 14.09.2015.
  */
+@Component
 public class HazelcastCacheTest implements Tester {
     @Resource private IMap testMap;
     private Random rn = new Random();
+    @Value("${maxNamberOfCacheElements}")
     private Integer maxNumber;
 
     public Integer getMaxNumber() {
         return maxNumber;
     }
-
     public void setMaxNumber(Integer maxNumber) {
         this.maxNumber = maxNumber;
     }
