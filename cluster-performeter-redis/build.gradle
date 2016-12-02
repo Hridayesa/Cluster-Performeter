@@ -3,6 +3,8 @@ version '1.0-SNAPSHOT'
 
 dependencies {
     compile project(':cluster-performeter-core')
+    compile 'org.springframework.data:spring-data-redis:1.7.5.RELEASE'
+    compile 'org.springframework.boot:spring-boot-starter-data-redis:1.4.2.RELEASE'
 }
 
 // Генерация дистрибутива
