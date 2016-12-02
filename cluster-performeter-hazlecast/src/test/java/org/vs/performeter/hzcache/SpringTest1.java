@@ -10,12 +10,11 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
-import org.vs.performeter.core.common.Tester;
-import org.vs.performeter.core.container.Runner;
-import org.vs.performeter.core.container.TestContainer;
 import org.vs.performeter.core.CommonConfiguration;
+import org.vs.performeter.core.common.Tester;
+import org.vs.performeter.core.container.Orchestrator;
+import org.vs.performeter.core.container.TestContainer;
 import org.vs.performeter.hzcache.tester.TesterMain;
-
 
 import javax.annotation.Resource;
 
@@ -31,7 +30,7 @@ import javax.annotation.Resource;
 public class SpringTest1 {
     @Autowired private Tester tester;
     @Resource private TestContainer testContainer;
-    @Autowired(required = false) private Runner runner;
+    @Autowired(required = false) private Orchestrator orchestrator;
     @Resource private HazelcastInstance hazelcastInstance;
     @Resource private IMap testMap;
 
@@ -54,7 +53,7 @@ public class SpringTest1 {
 
     @Test
     public void testRunnerExistence() throws Exception {
-        Assert.assertNull(runner);
+        Assert.assertNull(orchestrator);
     }
 
     @Test

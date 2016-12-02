@@ -5,14 +5,13 @@ import com.hazelcast.core.IMap;
 import com.hazelcast.core.ITopic;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 import org.vs.performeter.core.common.ContextEnum;
 import org.vs.performeter.core.common.MessageType;
 import org.vs.performeter.core.common.Statistics;
 import org.vs.performeter.core.common.Tester;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.util.concurrent.Executor;
 
@@ -20,7 +19,7 @@ import java.util.concurrent.Executor;
  * Created by karpovdc on 07.09.2015.
  */
 @Component
-@ConditionalOnBean(type = "org.vs.performeter.hzcache.tester.TesterMain")
+@ConditionalOnProperty("isTesterInstance")
 public class TestContainer implements Runnable {
     private static Logger LOG = LoggerFactory.getLogger(TestContainer.class);
     private int id;

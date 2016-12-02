@@ -6,13 +6,12 @@ import com.hazelcast.core.ITopic;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 import org.vs.performeter.core.common.Analyser;
 import org.vs.performeter.core.common.ContextEnum;
 import org.vs.performeter.core.common.MessageType;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.util.concurrent.TimeUnit;
 
@@ -20,9 +19,10 @@ import java.util.concurrent.TimeUnit;
  * Created by karpovdc on 07.09.2015.
  */
 @Component
-@ConditionalOnBean(type = {"org.vs.performeter.hzcache.runner.RunnerMain"})
-public class Runner implements Runnable{
-    private static Logger LOG = LoggerFactory.getLogger(Runner.class);
+@ConditionalOnProperty("isOrchestrator")
+//@ConditionalOnBean(type = {"org.vs.performeter.hzcache.orchestrator.RunnerMain"})
+public class Orchestrator implements Runnable{
+    private static Logger LOG = LoggerFactory.getLogger(Orchestrator.class);
 
     @Resource private IMap context;
     @Resource private Analyser analyser;
