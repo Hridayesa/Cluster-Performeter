@@ -9,7 +9,7 @@
 
     <bean id="analyser" class="org.vs.performeter.hzcache.orchestrator.HazelcastCacheTestAnalyser"/>
 
-    <bean id="tester" class="org.vs.performeter.hzcache.tester.HazelcastCacheTest">
+    <bean id="tester" class="org.vs.performeter.tester.HazelcastCacheTest">
         <property name="maxNumber" value="${maxNamberOfCacheElements}"/>
     </bean>
 

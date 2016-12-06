@@ -4,7 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 
-    <bean id="testContainer" class="org.vs.performeter.core.container.TestContainer" scope="singleton"/>
+    <bean id="testContainer" class="org.vs.performeter.tester.TestContainer" scope="singleton"/>
     <bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
         <property name="corePoolSize" value="${executer.corePoolSize}"/>
         <property name="maxPoolSize" value="${executer.maxPoolSize}"/>

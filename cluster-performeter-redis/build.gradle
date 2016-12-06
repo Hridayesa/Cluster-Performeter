@@ -5,17 +5,19 @@ apply plugin: 'application'
 
 dependencies {
     compile project(':cluster-performeter-core')
-    compile 'org.springframework.data:spring-data-redis:1.7.5.RELEASE'
+//    compile 'biz.paluch.redis:lettuce:4.3.0.Final'
+    compile 'biz.paluch.redis:lettuce:3.4.+'
+    compile 'org.springframework.data:spring-data-redis:1.7.+'
     compile 'org.springframework.boot:spring-boot-starter-data-redis:1.4.2.RELEASE'
 }
 
 // Генерация дистрибутива
 // два набора запускающих скриптов
-mainClassName = "org.vs.performeter.redis.tester.TesterMain"
+mainClassName = "org.vs.performeter.tester.TesterMain"
 applicationDefaultJvmArgs = ['-Dhazelcast.config=../config/hazelcast.xml', '-Duser.language=ru', '-Duser.region=RU', '-Dfile.encoding=UTF-8']
 
 task moreStartScripts(type: CreateStartScripts) {
-    mainClassName = "org.vs.performeter.redis.orchestrator.RunnerMain"
+    mainClassName = "org.vs.performeter.analyser.RunnerMain"
     applicationName = "analizer"
     defaultJvmOpts = ['-Dhazelcast.config=../config/hazelcast.xml', '-Duser.language=ru', '-Duser.region=RU', '-Dfile.encoding=UTF-8']
     outputDir = new File(project.buildDir, 'scripts')
