@@ -1,6 +1,7 @@
 # Cluster-Performeter
 >**Cluster-Performeter** is the tool for **fast prototyping and evaluating 
 performance and scalability** of your distributed algorithm
+
 ## What it is designed for
 * When you need to choose distributed in-memory storage or something like that
 * When you need to choose deployment topology of you distributed in-memory storage and evaluate 
