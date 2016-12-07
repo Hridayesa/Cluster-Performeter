@@ -1,7 +1,7 @@
 package org.vs.performeter.common;
 
 /**
- * Created by dekar on 06.12.2016.
+ * Created by Denis Karpov on 06.12.2016.
  */
 public class DefaultStatistics implements Statistics {
     private static final long serialVersionUID = 5789873333236157052L;

@@ -7,7 +7,7 @@ import org.vs.performeter.common.DefaultStatistics;
 import javax.annotation.Resource;
 
 /**
- * Created by dekar on 06.12.2016.
+ * Created by Denis Karpov on 06.12.2016.
  */
 @Component
 public class RedisAnalyser extends AbstractAnalyser<DefaultStatistics> {

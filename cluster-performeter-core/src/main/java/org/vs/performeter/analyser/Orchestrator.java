@@ -5,7 +5,7 @@ import com.hazelcast.core.IMap;
 import com.hazelcast.core.ITopic;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 import org.vs.performeter.common.ContextEnum;
 import org.vs.performeter.common.MessageType;
@@ -14,9 +14,10 @@ import javax.annotation.Resource;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by karpovdc on 07.09.2015.
+ * Created by Denis Karpov on 07.09.2015.
  */
 @Component
+@ConfigurationProperties(prefix = "performeter.orchestrator")
 //@ConditionalOnProperty("isOrchestrator")
 public class Orchestrator implements Runnable{
     private static Logger LOG = LoggerFactory.getLogger(Orchestrator.class);
@@ -28,14 +29,13 @@ public class Orchestrator implements Runnable{
     @Resource private ICountDownLatch finishCollectionLatch;
     @Resource private IMap statisticsMap;
 
-    @Value("${testDurationSeconds}")
-    private Integer seconds;
+    private Integer testDurationSeconds;
 
-    public Integer getSeconds() {
-        return seconds;
+    public Integer getTestDurationSeconds() {
+        return testDurationSeconds;
     }
-    public void setSeconds(Integer seconds) {
-        this.seconds = seconds;
+    public void setTestDurationSeconds(Integer testDurationSeconds) {
+        this.testDurationSeconds = testDurationSeconds;
     }
 
     private boolean init() {
@@ -63,7 +63,7 @@ public class Orchestrator implements Runnable{
             try {
                 controlTopic.publish(MessageType.START);
                 LOG.info("STARTED !!!");
-                Thread.sleep(1000 * seconds);
+                Thread.sleep(1000 * testDurationSeconds);
 
                 controlTopic.publish(MessageType.STOP);
                 LOG.info("STOPED !!!");

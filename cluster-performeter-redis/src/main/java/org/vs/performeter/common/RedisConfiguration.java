@@ -1,23 +1,20 @@
 package org.vs.performeter.common;
 
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
-//import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 
 /**
- * Created by dekar on 02.12.2016.
+ * Created by Denis Karpov on 02.12.2016.
  */
 @Configuration
 public class RedisConfiguration {
 
     @Bean
+    @ConfigurationProperties(prefix = "performeter.redis")
     public RedisConnectionFactory lettuceConnectionFactory(){
-        System.out.println("#############################");
-        LettuceConnectionFactory lettuceConnectionFactory = new LettuceConnectionFactory();
-        lettuceConnectionFactory.setHostName("localhost");
-        lettuceConnectionFactory.setPort(6379);
-        return lettuceConnectionFactory;
+        return new LettuceConnectionFactory();
     }
 }

@@ -11,7 +11,7 @@
 //import java.util.Random;
 //
 ///**
-// * Created by karpovdc on 03.11.2015.
+// * Created by Denis Karpov on 03.11.2015.
 // */
 //public class GeodeTester implements Tester {
 //    private static Logger LOG = LoggerFactory.getLogger(GeodeTester.class);

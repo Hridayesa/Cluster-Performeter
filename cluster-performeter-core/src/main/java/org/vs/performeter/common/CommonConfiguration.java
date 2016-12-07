@@ -1,7 +1,8 @@
 package org.vs.performeter.common;
 
 import com.hazelcast.core.*;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -11,10 +12,11 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.ThreadPoolExecutor;
 
 /**
- * Created by dekar on 29.11.2016.
+ * Created by Denis Karpov on 29.11.2016.
  */
 @Configuration
 @ComponentScan
+@EnableAutoConfiguration
 public class CommonConfiguration {
 
     @Bean
@@ -43,16 +45,17 @@ public class CommonConfiguration {
     }
 
 
-    @Bean
-    public Executor taskExecutor(@Value("${executer.corePoolSize}") Integer corePoolSize,
-                                 @Value("${executer.maxPoolSize}") Integer maxPoolSize,
-                                 @Value("${executer.queueCapacity}") Integer queueCapacity) {
+    @ConfigurationProperties(prefix = "performeter.executor")
+    @Bean(initMethod = "initialize")
+    public Executor taskExecutor() {
+//    public Executor taskExecutor(@Value("${performeter.executor.corePoolSize}") Integer corePoolSize,
+//                                 @Value("${performeter.executor.maxPoolSize}") Integer maxPoolSize,
+//                                 @Value("${performeter.executor.queueCapacity}") Integer queueCapacity) {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-        executor.setCorePoolSize(corePoolSize);
-        executor.setMaxPoolSize(maxPoolSize);
-        executor.setQueueCapacity(queueCapacity);
+//        executor.setCorePoolSize(corePoolSize);
+//        executor.setMaxPoolSize(maxPoolSize);
+//        executor.setQueueCapacity(queueCapacity);
         executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
-        executor.initialize();
         return executor;
     }
 

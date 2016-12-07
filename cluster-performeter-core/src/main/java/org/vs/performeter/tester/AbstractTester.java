@@ -4,13 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.vs.performeter.common.Statistics;
 
 /**
- * Created by dekar on 05.12.2016.
+ * Created by Denis Karpov on 05.12.2016.
  */
 public abstract class AbstractTester<S extends Statistics,V extends StatisticsBuilder<S>> implements Tester<S> {
 
     @Autowired
     protected StatisticsBuilder<S> statisticsBuilder;
-    protected long startMillis;
 
     @Override
     public void beforeTests() {

@@ -7,7 +7,7 @@ import org.vs.performeter.common.Statistics;
 import java.util.Map;
 
 /**
- * Created by dekar on 02.12.2016.
+ * Created by Denis Karpov on 02.12.2016.
  */
 public abstract class AbstractAnalyser<S extends Statistics> implements Analyser<S> {
     private static Logger LOG = LoggerFactory.getLogger(AbstractAnalyser.class);

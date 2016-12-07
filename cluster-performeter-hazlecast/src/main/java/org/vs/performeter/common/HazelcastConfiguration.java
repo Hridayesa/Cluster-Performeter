@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * Created by dekar on 06.12.2016.
+ * Created by Denis Karpov on 06.12.2016.
  */
 @Configuration
 public class HazelcastConfiguration {

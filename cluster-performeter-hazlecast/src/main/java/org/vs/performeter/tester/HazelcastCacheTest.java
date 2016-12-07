@@ -1,7 +1,7 @@
 package org.vs.performeter.tester;
 
 import com.hazelcast.core.IMap;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 import org.vs.performeter.common.DefaultStatistics;
 
@@ -9,27 +9,27 @@ import javax.annotation.Resource;
 import java.util.Random;
 
 /**
- * Created by karpovdc on 14.09.2015.
+ * Created by Denis Karpov on 14.09.2015.
  */
 @Component
+@ConfigurationProperties(prefix = "performeter.hazlecast")
 public class HazelcastCacheTest extends AbstractTester<DefaultStatistics, DefaultStatisticsBuilder> {
     @Resource private IMap testMap;
     private Random rn = new Random();
-    @Value("${maxNamberOfCacheElements}")
-    private Integer maxNumber;
+    private Integer maxNamberOfCacheElements;
 
-    public Integer getMaxNumber() {
-        return maxNumber;
+    public Integer getMaxNamberOfCacheElements() {
+        return maxNamberOfCacheElements;
     }
-    public void setMaxNumber(Integer maxNumber) {
-        this.maxNumber = maxNumber;
+    public void setMaxNamberOfCacheElements(Integer maxNamberOfCacheElements) {
+        this.maxNamberOfCacheElements = maxNamberOfCacheElements;
     }
 
     @Override
     public void doSingleTest() {
         statisticsBuilder.countPlusPlus();
 
-        int intKey = rn.nextInt(maxNumber);
+        int intKey = rn.nextInt(maxNamberOfCacheElements);
         String key = Integer.toString(intKey);
         testMap.lock(key);
         try {

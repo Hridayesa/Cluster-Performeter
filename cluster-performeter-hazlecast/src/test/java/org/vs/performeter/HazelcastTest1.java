@@ -9,7 +9,7 @@ import java.util.Map;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Created by karpovdc on 01.09.2015.
+ * Created by Denis Karpov on 01.09.2015.
  */
 public class HazelcastTest1 {
     @Test

@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Import;
 import org.vs.performeter.common.CommonConfiguration;
 
 /**
- * Created by dekar on 06.12.2016.
+ * Created by Denis Karpov on 06.12.2016.
  */
 @Configuration
 @ComponentScan

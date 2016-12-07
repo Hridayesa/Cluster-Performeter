@@ -14,7 +14,7 @@ import javax.annotation.Resource;
 import java.util.concurrent.Executor;
 
 /**
- * Created by karpovdc on 07.09.2015.
+ * Created by Denis Karpov on 07.09.2015.
  */
 @Component
 //@ConditionalOnProperty("isTesterInstance")

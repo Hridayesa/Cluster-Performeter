@@ -4,7 +4,7 @@
 //import org.springframework.context.support.ClassPathXmlApplicationContext;
 //
 ///**
-// * Created by karpovdc on 10.09.2015.
+// * Created by Denis Karpov on 10.09.2015.
 // */
 //public class RunnerMain {
 //    public static void main(String[] args) throws InterruptedException {

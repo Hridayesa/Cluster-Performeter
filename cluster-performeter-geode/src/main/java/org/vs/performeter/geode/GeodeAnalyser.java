@@ -10,7 +10,7 @@
 //import java.util.Set;
 //
 ///**
-// * Created by karpovdc on 03.11.2015.
+// * Created by Denis Karpov on 03.11.2015.
 // */
 //public class GeodeAnalyser implements Analyser {
 //    private static Logger LOG = LoggerFactory.getLogger(GeodeAnalyser.class);

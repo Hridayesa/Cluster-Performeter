@@ -6,7 +6,7 @@ import org.vs.performeter.common.DefaultStatistics;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
- * Created by karpovdc on 08.09.2015.
+ * Created by Denis Karpov on 08.09.2015.
  */
 @Component
 public class DefaultStatisticsBuilder implements StatisticsBuilder<DefaultStatistics>{

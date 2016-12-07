@@ -12,7 +12,7 @@
 //import javax.annotation.Resource;
 //
 ///**
-// * Created by karpovdc on 07.09.2015.
+// * Created by Denis Karpov on 07.09.2015.
 // */
 //@RunWith(SpringJUnit4ClassRunner.class)
 //@ContextConfiguration(locations = { "/core/parent.cfg.xml",

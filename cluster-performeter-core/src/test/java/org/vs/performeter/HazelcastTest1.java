@@ -5,10 +5,10 @@ import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.core.IMap;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTestContextBootstrapper;
+import org.springframework.test.context.BootstrapWith;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import org.vs.performeter.common.CommonConfiguration;
 
 import javax.annotation.Resource;
@@ -17,11 +17,11 @@ import java.util.Map;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Created by karpovdc on 01.09.2015.
+ * Created by Denis Karpov on 01.09.2015.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = CommonConfiguration.class, loader = AnnotationConfigContextLoader.class)
-@TestPropertySource( locations = {"classpath:app.properties"} )
+@ContextConfiguration(classes = CommonConfiguration.class)
+@BootstrapWith(SpringBootTestContextBootstrapper.class)
 public class HazelcastTest1 {
     @Resource IMap context;
 

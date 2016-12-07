@@ -29,7 +29,7 @@ distributions {
     main {
         contents {
             from("src/main/resources") {
-                include 'app.properties'
+                include 'application.yml'
                 include 'hazelcast.xml'
                 into "config"
             }

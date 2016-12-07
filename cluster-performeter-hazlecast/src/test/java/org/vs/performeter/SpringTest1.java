@@ -6,10 +6,10 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTestContextBootstrapper;
+import org.springframework.test.context.BootstrapWith;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import org.vs.performeter.analyser.Orchestrator;
 import org.vs.performeter.common.CommonConfiguration;
 import org.vs.performeter.tester.TestContainer;
@@ -19,14 +19,12 @@ import org.vs.performeter.tester.TesterMain;
 import javax.annotation.Resource;
 
 /**
- * Created by karpovdc on 07.09.2015.
+ * Created by Denis Karpov on 07.09.2015.
  */
 
-//@ContextConfiguration(locations = { "/core/parent.cfg.xml",
-//        "/core/tester.cfg.xml","/hazelcast-test/hazelcast.cfg.xml" })
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {CommonConfiguration.class, TesterMain.class}, loader = AnnotationConfigContextLoader.class)
-@TestPropertySource( locations = {"classpath:app.properties"}, properties = {"isTesterInstance = true"})
+@ContextConfiguration(classes = {CommonConfiguration.class, TesterMain.class})
+@BootstrapWith(SpringBootTestContextBootstrapper.class)
 public class SpringTest1 {
     @Autowired private Tester tester;
     @Resource private TestContainer testContainer;

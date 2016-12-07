@@ -7,7 +7,7 @@
 //import org.apache.geode.cache.client.ClientRegionShortcut;
 //
 ///**
-// * Created by karpovdc on 09.11.2015.
+// * Created by Denis Karpov on 09.11.2015.
 // */
 //public class GeodeFactory {
 //    public static ClientCache createClientCache(String host, int port){
