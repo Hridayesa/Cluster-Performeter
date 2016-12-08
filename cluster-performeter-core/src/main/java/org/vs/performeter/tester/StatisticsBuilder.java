@@ -5,7 +5,7 @@ import org.vs.performeter.common.Statistics;
 /**
  * Created by Denis Karpov on 06.12.2016.
  */
-public interface StatisticsBuilder<V extends Statistics> {
+public interface StatisticsBuilder<S extends Statistics> {
 
     void start();
 
@@ -13,5 +13,5 @@ public interface StatisticsBuilder<V extends Statistics> {
 
     void stop();
 
-    V getStatistics();
+    S getStatistics();
 }

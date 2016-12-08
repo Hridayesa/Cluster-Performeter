@@ -10,7 +10,8 @@ performance and scalability
 
 Then you need to build several prototypes. **Cluster-Performeter** is the tool that will help you.
 
-## Design and architecture 
+## Design and architecture
+![Class Diagram](docs/models/ClassDiagram.jpg "Class Diagram")
 >TODO
 
 ## How to use it

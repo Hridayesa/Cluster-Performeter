@@ -7,9 +7,9 @@ import java.util.Map;
 /**
  * Created by Denis Karpov on 14.09.2015.
  */
-public interface Analyser<V extends Statistics> {
+public interface Analyser<S extends Statistics> {
 
     void prepare();
 
-    void analyse(Map<String, V> statistics);
+    void analyse(Map<String, S> statistics);
 }
