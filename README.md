@@ -15,6 +15,9 @@ Then you need to build several prototypes. **Cluster-Performeter** is the tool t
 ### Deployment schema
 ![Clusters schema](docs/models/Clusters.jpg "Clusters schema")
 
+### Activity Diagram
+![Clusters schema](docs/models/Cache_test_activities.jpg "Activity Diagram")
+
 ### Class Diagram
 ![Class Diagram](docs/models/ClassDiagram.jpg "Class Diagram")
 >TODO
