@@ -21,7 +21,8 @@ import java.util.stream.IntStream;
 @ContextConfiguration(classes = CommonConfiguration.class)
 @BootstrapWith(SpringBootTestContextBootstrapper.class)
 public class ExecutorTest {
-    @Resource private Executor taskExecutor;
+    @Resource
+    private Executor taskExecutor;
 
     @Test
     public void testExecutorConfig() throws Exception {
@@ -33,16 +34,14 @@ public class ExecutorTest {
     @Test
     public void testName1() throws Exception {
         IntStream.rangeClosed(1, 100)
-                .forEach(value -> {
-                            taskExecutor.execute(() -> {
-                                try {
-                                    Thread.sleep(100);
-                                } catch (InterruptedException e) {
-                                    e.printStackTrace();
-                                }
-                                System.out.println(value);
-                            });
-                        }
+                .forEach(value -> taskExecutor.execute(() -> {
+                            try {
+                                Thread.sleep(100);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            System.out.println(value);
+                        })
                 );
         Assert.assertEquals(1, 1);
     }

@@ -18,36 +18,41 @@ import java.util.concurrent.TimeUnit;
  */
 @Component
 @ConfigurationProperties(prefix = "performeter.orchestrator")
-//@ConditionalOnProperty("isOrchestrator")
-public class Orchestrator implements Runnable{
+public class Orchestrator implements Runnable {
     private static Logger LOG = LoggerFactory.getLogger(Orchestrator.class);
 
-    @Resource private Analyser analyser;
+    @Resource
+    private Analyser analyser;
 
-    @Resource private IMap context;
-    @Resource private ITopic<MessageType> controlTopic;
-    @Resource private ICountDownLatch finishCollectionLatch;
-    @Resource private IMap statisticsMap;
+    @Resource
+    private IMap context;
+    @Resource
+    private ITopic<MessageType> controlTopic;
+    @Resource
+    private ICountDownLatch finishCollectionLatch;
+    @Resource
+    private IMap statisticsMap;
 
     private Integer testDurationSeconds;
 
     public Integer getTestDurationSeconds() {
         return testDurationSeconds;
     }
+
     public void setTestDurationSeconds(Integer testDurationSeconds) {
         this.testDurationSeconds = testDurationSeconds;
     }
 
     private boolean init() {
-        Integer counts = (Integer)context.get(ContextEnum.TESTERS_COUNT);
-        LOG.info("## test application count="+counts);
-        if (counts!=null) {
+        Integer counts = (Integer) context.get(ContextEnum.TESTERS_COUNT);
+        LOG.info("## test application count=" + counts);
+        if (counts != null) {
             finishCollectionLatch.trySetCount(counts);
         }
 
         analyser.prepare();
 
-        return counts!=null;
+        return counts != null;
     }
 
     private void doAnalysis() throws InterruptedException {
@@ -59,7 +64,7 @@ public class Orchestrator implements Runnable{
     @Override
     public void run() {
         LOG.info("READY !!!");
-        if ( init() ) {
+        if (init()) {
             try {
                 controlTopic.publish(MessageType.START);
                 LOG.info("STARTED !!!");

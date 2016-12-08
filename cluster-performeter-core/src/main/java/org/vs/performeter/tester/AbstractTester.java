@@ -6,7 +6,7 @@ import org.vs.performeter.common.Statistics;
 /**
  * Created by Denis Karpov on 05.12.2016.
  */
-public abstract class AbstractTester<S extends Statistics,V extends StatisticsBuilder<S>> implements Tester<S> {
+public abstract class AbstractTester<S extends Statistics, V extends StatisticsBuilder<S>> implements Tester<S> {
 
     @Autowired
     protected StatisticsBuilder<S> statisticsBuilder;
@@ -18,7 +18,7 @@ public abstract class AbstractTester<S extends Statistics,V extends StatisticsBu
 
     @Override
     public void afterTests() {
-        statisticsBuilder.stop();;
+        statisticsBuilder.stop();
     }
 
     @Override
