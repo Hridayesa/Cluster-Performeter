@@ -23,7 +23,8 @@ import static org.junit.Assert.assertEquals;
 @ContextConfiguration(classes = CommonConfiguration.class)
 @BootstrapWith(SpringBootTestContextBootstrapper.class)
 public class HazelcastTest1 {
-    @Resource IMap context;
+    @Resource
+    IMap context;
 
     @Test
     public void testName() throws Exception {
@@ -35,7 +36,7 @@ public class HazelcastTest1 {
 
         HazelcastInstance hz1 = Hazelcast.newHazelcastInstance();
         Map<String, String> map1 = hz1.getMap("context");
-        Map<String,String> map = context;
+        Map<String, String> map = context;
         for (Map.Entry entry : map.entrySet()) {
             assertEquals(entry.getValue(), map1.get(entry.getKey()));
         }

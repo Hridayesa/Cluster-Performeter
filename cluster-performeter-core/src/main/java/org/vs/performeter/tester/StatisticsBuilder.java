@@ -7,7 +7,9 @@ import org.vs.performeter.common.Statistics;
  */
 public interface StatisticsBuilder<V extends Statistics> {
     void start();
+
     void countPlusPlus();
+
     void stop();
 
     V getStatistics();

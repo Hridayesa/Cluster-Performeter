@@ -9,19 +9,19 @@ import java.util.concurrent.atomic.AtomicLong;
  * Created by Denis Karpov on 08.09.2015.
  */
 @Component
-public class DefaultStatisticsBuilder implements StatisticsBuilder<DefaultStatistics>{
+public class DefaultStatisticsBuilder implements StatisticsBuilder<DefaultStatistics> {
     private static final long serialVersionUID = -4435431292679522692L;
 
-    protected AtomicLong count = new AtomicLong(0);
-    protected long startMillis;
-    protected long endMillis;
+    private AtomicLong count = new AtomicLong(0);
+    private long startMillis;
+    private long endMillis;
 
     @Override
     public void start() {
         startMillis = System.currentTimeMillis();
     }
 
-    public void countPlusPlus(){
+    public void countPlusPlus() {
         count.getAndIncrement();
     }
 

@@ -5,5 +5,5 @@ package org.vs.performeter.common;
  */
 public enum ContextEnum {
     STATE,
-    TESTERS_COUNT;
+    TESTERS_COUNT
 }

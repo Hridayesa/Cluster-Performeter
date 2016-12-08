@@ -20,30 +20,29 @@ import java.util.concurrent.ThreadPoolExecutor;
 public class CommonConfiguration {
 
     @Bean
-    public HazelcastInstance hazelcast(){
+    public HazelcastInstance hazelcast() {
         return Hazelcast.newHazelcastInstance();
     }
 
     @Bean
-    public ITopic controlTopic(){
+    public ITopic controlTopic() {
         return hazelcast().getTopic("controlTopic");
     }
 
     @Bean
-    public IMap context(){
+    public IMap context() {
         return hazelcast().getMap("context");
     }
 
     @Bean
-    public IMap statisticsMap(){
+    public IMap statisticsMap() {
         return hazelcast().getMap("statisticsMap");
     }
 
     @Bean
-    public ICountDownLatch finishCollectionLatch(){
+    public ICountDownLatch finishCollectionLatch() {
         return hazelcast().getCountDownLatch("finishCollectionLatch");
     }
-
 
     @ConfigurationProperties(prefix = "performeter.executor")
     @Bean(initMethod = "initialize")
