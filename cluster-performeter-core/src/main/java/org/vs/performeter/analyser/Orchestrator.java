@@ -18,7 +18,6 @@ import java.util.concurrent.TimeUnit;
  */
 @Component
 @ConfigurationProperties(prefix = "performeter.orchestrator")
-//@ConditionalOnProperty("isOrchestrator")
 public class Orchestrator implements Runnable {
     private static Logger LOG = LoggerFactory.getLogger(Orchestrator.class);
 

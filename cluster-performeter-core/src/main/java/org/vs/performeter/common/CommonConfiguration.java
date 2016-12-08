@@ -47,13 +47,7 @@ public class CommonConfiguration {
     @ConfigurationProperties(prefix = "performeter.executor")
     @Bean(initMethod = "initialize")
     public Executor taskExecutor() {
-//    public Executor taskExecutor(@Value("${performeter.executor.corePoolSize}") Integer corePoolSize,
-//                                 @Value("${performeter.executor.maxPoolSize}") Integer maxPoolSize,
-//                                 @Value("${performeter.executor.queueCapacity}") Integer queueCapacity) {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-//        executor.setCorePoolSize(corePoolSize);
-//        executor.setMaxPoolSize(maxPoolSize);
-//        executor.setQueueCapacity(queueCapacity);
         executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
         return executor;
     }
