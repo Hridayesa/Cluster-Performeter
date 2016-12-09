@@ -1,2 +1,6 @@
 rootProject.name = 'cluster-performeter'
-include "cluster-performeter-core", "cluster-performeter-hazlecast", "cluster-performeter-geode", "cluster-performeter-redis"
+include "cluster-performeter-core",
+        "cluster-performeter-hazlecast",
+        "cluster-performeter-hazlecast-optimistic",
+        "cluster-performeter-geode",
+        "cluster-performeter-redis"
