@@ -9,7 +9,7 @@ public interface StatisticsBuilder<S extends Statistics> {
 
     void start();
 
-    void countPlusPlus();
+    long countPlusPlus();
 
     void stop();
 

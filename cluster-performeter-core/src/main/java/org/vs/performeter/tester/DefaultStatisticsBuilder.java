@@ -16,13 +16,25 @@ public class DefaultStatisticsBuilder implements StatisticsBuilder<DefaultStatis
     private long startMillis;
     private long endMillis;
 
+    public AtomicLong getCount() {
+        return count;
+    }
+
+    public long getStartMillis() {
+        return startMillis;
+    }
+
+    public long getEndMillis() {
+        return endMillis;
+    }
+
     @Override
     public void start() {
         startMillis = System.currentTimeMillis();
     }
 
-    public void countPlusPlus() {
-        count.getAndIncrement();
+    public long countPlusPlus() {
+        return count.incrementAndGet();
     }
 
     @Override

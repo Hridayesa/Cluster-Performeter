@@ -9,7 +9,7 @@ import org.vs.performeter.common.Statistics;
 public abstract class AbstractTester<S extends Statistics, V extends StatisticsBuilder<S>> implements Tester<S> {
 
     @Autowired
-    protected StatisticsBuilder<S> statisticsBuilder;
+    protected V statisticsBuilder;
 
     @Override
     public void beforeTests() {

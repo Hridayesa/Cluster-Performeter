@@ -1,0 +1,26 @@
+performeter:
+  orchestrator:
+    testDurationSeconds: 60
+
+  executor:
+    corePoolSize: 20
+    maxPoolSize: 40
+    queueCapacity: 10
+
+  hazlecast:
+    maxNamberOfCacheElements: 1000
+
+  redis:
+    maxNamberOfCacheElements: 1000
+    hostName: localhost
+    port:     6379
+
+  ignite:
+    maxNamberOfCacheElements: 1000
+
+  geode:
+    host: QQQQQQQQQ
+    port: 10334
+    testregion:
+      type: CACHING_PROXY
+      name: region
