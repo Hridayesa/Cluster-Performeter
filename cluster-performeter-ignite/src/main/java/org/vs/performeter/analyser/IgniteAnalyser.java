@@ -11,7 +11,7 @@ public class IgniteAnalyser extends AbstractAnalyser<DefaultStatistics> {
 
     @Override
     public void prepare() {
-        //template.delete("QQQ");
+
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
