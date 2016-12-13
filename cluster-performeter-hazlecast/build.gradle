@@ -2,6 +2,7 @@ group 'org.vs.performeter'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'application'
+apply plugin: 'org.springframework.boot'
 
 dependencies {
     compile project(':cluster-performeter-core')
