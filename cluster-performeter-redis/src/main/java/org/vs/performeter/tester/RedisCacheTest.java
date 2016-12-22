@@ -16,7 +16,7 @@ import java.util.Random;
 @Component
 public class RedisCacheTest extends AbstractTester<DefaultStatistics, DefaultStatisticsBuilder> {
     private Random rn = new Random();
-    private Integer maxNamberOfCacheElements;
+    private Integer maxNumberOfCacheElements;
     HashOperations<String, String, Long> hashOperations;
 
     @Resource(name = "redisTemplate")
@@ -24,18 +24,18 @@ public class RedisCacheTest extends AbstractTester<DefaultStatistics, DefaultSta
         hashOperations = template.opsForHash();
     }
 
-    public Integer getMaxNamberOfCacheElements() {
-        return maxNamberOfCacheElements;
+    public Integer getMaxNumberOfCacheElements() {
+        return maxNumberOfCacheElements;
     }
-    public void setMaxNamberOfCacheElements(Integer maxNamberOfCacheElements) {
-        this.maxNamberOfCacheElements = maxNamberOfCacheElements;
+    public void setMaxNumberOfCacheElements(Integer maxNumberOfCacheElements) {
+        this.maxNumberOfCacheElements = maxNumberOfCacheElements;
     }
 
     @Override
     public void doSingleTest() {
         statisticsBuilder.countPlusPlus();
 
-        int intKey = rn.nextInt(maxNamberOfCacheElements);
+        int intKey = rn.nextInt(maxNumberOfCacheElements);
         String key = Integer.toString(intKey);
 
         // atomic operation

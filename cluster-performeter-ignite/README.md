@@ -1,7 +1,7 @@
 # Ignite. Distributed counters with pessimistic locking
 
 ```java
-    int key = random.nextInt(maxNamberOfCacheElements);
+    int key = random.nextInt(maxNumberOfCacheElements);
     
     Lock lock = counter.lock(key);
     lock.lock();

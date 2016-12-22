@@ -16,24 +16,24 @@ import java.util.concurrent.locks.Lock;
 @Component
 public class IgniteCacheTest extends AbstractTester<DefaultStatistics, DefaultStatisticsBuilder> {
     private Random random = new Random();
-    private Integer maxNamberOfCacheElements;
+    private Integer maxNumberOfCacheElements;
 
     @Resource
     IgniteCache<Integer,Integer> counter;
 
 
-    public Integer getMaxNamberOfCacheElements() {
-        return maxNamberOfCacheElements;
+    public Integer getMaxNumberOfCacheElements() {
+        return maxNumberOfCacheElements;
     }
-    public void setMaxNamberOfCacheElements(Integer maxNamberOfCacheElements) {
-        this.maxNamberOfCacheElements = maxNamberOfCacheElements;
+    public void setMaxNumberOfCacheElements(Integer maxNumberOfCacheElements) {
+        this.maxNumberOfCacheElements = maxNumberOfCacheElements;
     }
 
     @Override
     public void doSingleTest() {
         statisticsBuilder.countPlusPlus();
 
-        int key = random.nextInt(maxNamberOfCacheElements);
+        int key = random.nextInt(maxNumberOfCacheElements);
 
         Lock lock = counter.lock(key);
         lock.lock();

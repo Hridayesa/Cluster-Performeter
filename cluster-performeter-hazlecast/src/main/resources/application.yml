@@ -8,10 +8,10 @@ performeter:
     queueCapacity: 10
 
   hazlecast:
-    maxNamberOfCacheElements: 1000
+    maxNumberOfCacheElements: 1000
 
   redis:
-    maxNamberOfCacheElements: 1000
+    maxNumberOfCacheElements: 1000
 
   geode:
     host: QQQQQQQQQ

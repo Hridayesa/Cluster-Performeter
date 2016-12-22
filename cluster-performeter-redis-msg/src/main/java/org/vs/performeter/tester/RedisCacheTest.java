@@ -17,7 +17,7 @@ import java.util.Random;
 @Component
 public class RedisCacheTest extends AbstractTester<RedisCollisionStatistics, RedisCollisionStatisticsBuilder> {
     private Random random = new Random();
-    private Integer maxNamberOfCacheElements;
+    private Integer maxNumberOfCacheElements;
     private String blob;
 
     HashOperations<String, String, Msg> hashOperations;
@@ -27,12 +27,12 @@ public class RedisCacheTest extends AbstractTester<RedisCollisionStatistics, Red
         hashOperations = template.opsForHash();
     }
 
-    public Integer getMaxNamberOfCacheElements() {
-        return maxNamberOfCacheElements;
+    public Integer getMaxNumberOfCacheElements() {
+        return maxNumberOfCacheElements;
     }
 
-    public void setMaxNamberOfCacheElements(Integer maxNamberOfCacheElements) {
-        this.maxNamberOfCacheElements = maxNamberOfCacheElements;
+    public void setMaxNumberOfCacheElements(Integer maxNumberOfCacheElements) {
+        this.maxNumberOfCacheElements = maxNumberOfCacheElements;
     }
 
     public String getBlob() {
@@ -56,7 +56,7 @@ public class RedisCacheTest extends AbstractTester<RedisCollisionStatistics, Red
     }
 
     private Msg createMsg() {
-        String id = Integer.toString(random.nextInt(maxNamberOfCacheElements));
+        String id = Integer.toString(random.nextInt(maxNumberOfCacheElements));
         return new Msg(id, "name" + id, getBlob());
     }
 }

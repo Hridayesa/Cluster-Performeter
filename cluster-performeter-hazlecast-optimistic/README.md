@@ -1,7 +1,7 @@
 # Hazlecast. Distributed counters with optimistic locking
 
 ```java
-    int intKey = random.nextInt(maxNamberOfCacheElements);
+    int intKey = random.nextInt(maxNumberOfCacheElements);
     String key = Integer.toString(intKey);
 
     try {

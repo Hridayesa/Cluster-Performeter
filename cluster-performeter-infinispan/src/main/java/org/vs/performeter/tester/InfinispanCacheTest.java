@@ -18,20 +18,20 @@ public class InfinispanCacheTest extends AbstractTester<DefaultStatistics, Defau
     @Resource(name = "testMap")
     private Cache<Integer, Integer> testMap;
     private Random random = new Random();
-    private Integer maxNamberOfCacheElements;
+    private Integer maxNumberOfCacheElements;
 
-    public Integer getMaxNamberOfCacheElements() {
-        return maxNamberOfCacheElements;
+    public Integer getMaxNumberOfCacheElements() {
+        return maxNumberOfCacheElements;
     }
 
-    public void setMaxNamberOfCacheElements(Integer maxNamberOfCacheElements) {
-        this.maxNamberOfCacheElements = maxNamberOfCacheElements;
+    public void setMaxNumberOfCacheElements(Integer maxNumberOfCacheElements) {
+        this.maxNumberOfCacheElements = maxNumberOfCacheElements;
     }
 
     @Override
     public void doSingleTest() {
         statisticsBuilder.countPlusPlus();
-        int key = random.nextInt(maxNamberOfCacheElements);
+        int key = random.nextInt(maxNumberOfCacheElements);
 
         try {
             while (true) {

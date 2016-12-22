@@ -1,7 +1,7 @@
 # Redis. Distributed counters.
 
 ```java
-    int intKey = rn.nextInt(maxNamberOfCacheElements);
+    int intKey = rn.nextInt(maxNumberOfCacheElements);
     String key = Integer.toString(intKey);
 
     // atomic operation
