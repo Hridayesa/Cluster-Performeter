@@ -5,4 +5,5 @@ include "cluster-performeter-core",
         "cluster-performeter-geode",
         "cluster-performeter-redis",
         "cluster-performeter-redis-msg",
-        "cluster-performeter-ignite"
+        "cluster-performeter-ignite",
+        "cluster-performeter-infinispan"
