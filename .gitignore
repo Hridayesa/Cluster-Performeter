@@ -2,6 +2,7 @@
 .gradle/
 .build/
 */build/
+ansible/roles/external/**
 *.class
 
 # Mobile Tools for Java (J2ME)
