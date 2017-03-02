@@ -11,7 +11,8 @@ import org.vs.performeter.common.MessageType;
 import org.vs.performeter.common.Statistics;
 
 import javax.annotation.Resource;
-import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Denis Karpov on 07.09.2015.
@@ -31,7 +32,7 @@ public class TestContainer implements Runnable {
     @Resource
     private ICountDownLatch finishCollectionLatch;
     @Resource
-    private Executor taskExecutor;
+    private ExecutorService taskExecutor;
 
     @Resource
     private Tester tester;
@@ -74,17 +75,19 @@ public class TestContainer implements Runnable {
         tester.beforeTests();
         LOG.info("STARTED !!!");
         while (!stopped) {
-            taskExecutor.execute(() -> tester.doSingleTest());
+            taskExecutor.submit(() -> tester.doSingleTest());
 //            statistics.countPlusPlus();
         }
-        tester.afterTests();
-        LOG.info("STOPED !!!");
-
-        saveStatistics(tester.getStatistics());
-
-//        saveStatistics(System.currentTimeMillis() - startMillis);
-
+        taskExecutor.shutdown();
         try {
+            taskExecutor.awaitTermination(5, TimeUnit.SECONDS);
+            tester.afterTests();
+            LOG.info("STOPED !!!");
+
+            saveStatistics(tester.getStatistics());
+
+    //        saveStatistics(System.currentTimeMillis() - startMillis);
+
             Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();

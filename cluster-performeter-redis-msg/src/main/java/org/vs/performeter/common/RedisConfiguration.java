@@ -1,6 +1,7 @@
 package org.vs.performeter.common;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.RedisSentinelConfiguration;
@@ -10,6 +11,7 @@ import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
  * Created by Denis Karpov on 02.12.2016.
  */
 @Configuration
+@ComponentScan("org.vs.performeter.data.dummy")
 public class RedisConfiguration {
 
     @Bean

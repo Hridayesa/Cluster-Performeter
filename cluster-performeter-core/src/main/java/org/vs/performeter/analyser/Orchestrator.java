@@ -56,7 +56,7 @@ public class Orchestrator implements Runnable {
     }
 
     private void doAnalysis() throws InterruptedException {
-        finishCollectionLatch.await(10, TimeUnit.SECONDS);
+        finishCollectionLatch.await(15 + testDurationSeconds, TimeUnit.SECONDS);
         LOG.info("Do analysis");
         analyser.analyse(statisticsMap);
     }
@@ -68,12 +68,18 @@ public class Orchestrator implements Runnable {
             try {
                 controlTopic.publish(MessageType.START);
                 LOG.info("STARTED !!!");
-                Thread.sleep(1000 * testDurationSeconds);
 
-                controlTopic.publish(MessageType.STOP);
-                LOG.info("STOPED !!!");
+                new Thread(() -> {
+                    try {
+                        Thread.sleep(1000 * testDurationSeconds);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    controlTopic.publish(MessageType.STOP);
+                    LOG.info("STOPED !!!");
+                }).start();
 
-                doAnalysis();
+                doAnalysis();  // Wait for all statistics
                 LOG.info("DONE !!!");
                 controlTopic.publish(MessageType.EXIT);
             } catch (InterruptedException e) {

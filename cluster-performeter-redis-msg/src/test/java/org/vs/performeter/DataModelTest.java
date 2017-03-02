@@ -7,8 +7,8 @@ import org.springframework.boot.test.context.SpringBootTestContextBootstrapper;
 import org.springframework.test.context.BootstrapWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.vs.performeter.common.Msg;
-import org.vs.performeter.tester.DataProvider;
+import org.vs.performeter.data.DataProvider;
+import org.vs.performeter.data.dummy.Msg;
 import org.vs.performeter.tester.TesterMain;
 
 import javax.annotation.Resource;

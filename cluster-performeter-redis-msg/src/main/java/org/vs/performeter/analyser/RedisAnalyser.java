@@ -17,6 +17,7 @@ public class RedisAnalyser extends AbstractAnalyser<DefaultStatistics> {
 
     @Override
     public void prepare() {
+        // TODO There are problems with delete. (Timeout problems)
         template.delete("QQQ");
         try {
             Thread.sleep(3000);

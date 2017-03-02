@@ -21,7 +21,7 @@ public class DefaultStatistics implements Statistics {
 
     @Override
     public Long getMilliseconds() {
-        return count;
+        return milliseconds;
     }
 
     @Override

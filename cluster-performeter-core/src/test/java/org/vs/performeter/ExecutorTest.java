@@ -4,14 +4,14 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTestContextBootstrapper;
-import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.test.context.BootstrapWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.vs.performeter.common.CommonConfiguration;
 
 import javax.annotation.Resource;
-import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.ThreadPoolExecutor;
 import java.util.stream.IntStream;
 
 /**
@@ -22,19 +22,19 @@ import java.util.stream.IntStream;
 @BootstrapWith(SpringBootTestContextBootstrapper.class)
 public class ExecutorTest {
     @Resource
-    private Executor taskExecutor;
+    private ExecutorService taskExecutor;
 
     @Test
     public void testExecutorConfig() throws Exception {
-        ThreadPoolTaskExecutor exec = (ThreadPoolTaskExecutor) taskExecutor;
+        ThreadPoolExecutor exec = (ThreadPoolExecutor) taskExecutor;
         Assert.assertEquals(20, exec.getCorePoolSize());
-        Assert.assertEquals(40, exec.getMaxPoolSize());
+        Assert.assertEquals(20, exec.getMaximumPoolSize());
     }
 
     @Test
     public void testName1() throws Exception {
         IntStream.rangeClosed(1, 100)
-                .forEach(value -> taskExecutor.execute(() -> {
+                .forEach(value -> taskExecutor.submit(() -> {
                             try {
                                 Thread.sleep(100);
                             } catch (InterruptedException e) {

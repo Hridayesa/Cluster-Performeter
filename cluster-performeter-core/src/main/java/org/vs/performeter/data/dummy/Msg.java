@@ -1,4 +1,4 @@
-package org.vs.performeter.common;
+package org.vs.performeter.data.dummy;
 
 import java.io.Serializable;
 

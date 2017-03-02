@@ -1,8 +1,8 @@
-package org.vs.performeter.tester;
+package org.vs.performeter.data.dummy;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
-import org.vs.performeter.common.Msg;
+import org.vs.performeter.data.DataProvider;
 
 import java.util.Random;
 
@@ -11,7 +11,7 @@ import java.util.Random;
  */
 @Component
 @ConfigurationProperties(prefix = "performeter.dataprovider")
-public class Def1DataProvider implements DataProvider<Msg> {
+public class DummyMsgGenDataProvider implements DataProvider<Msg> {
     private Random random = new Random();
 
     private String blob;

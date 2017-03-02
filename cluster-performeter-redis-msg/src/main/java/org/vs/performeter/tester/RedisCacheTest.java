@@ -4,8 +4,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
-import org.vs.performeter.common.Msg;
 import org.vs.performeter.common.RedisCollisionStatistics;
+import org.vs.performeter.data.DataProvider;
+import org.vs.performeter.data.dummy.Msg;
 
 import javax.annotation.Resource;
 import java.util.Random;
@@ -18,7 +19,7 @@ import java.util.Random;
 public class RedisCacheTest extends AbstractTester<RedisCollisionStatistics, RedisCollisionStatisticsBuilder> {
     private Random random = new Random();
 
-    @Resource(name = "def1DataProvider")
+    @Resource(name = "dummyMsgGenDataProvider")
     private DataProvider<Msg> dataProvider;
 
     HashOperations<String, String, Msg> hashOperations;
