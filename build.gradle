@@ -1,6 +1,6 @@
-allprojects {
-    apply plugin: 'idea'
-}
+//allprojects {
+//    apply plugin: 'idea'
+//}
 
 subprojects {
 
@@ -9,11 +9,13 @@ subprojects {
             springBootVersion = '1.4.2.RELEASE'
         }
         repositories {
-            jcenter()
-            maven { url "http://repo.maven.apache.org/maven2" }
-            maven { url "http://repo.spring.io/snapshot" }
-            maven { url "http://repo.spring.io/milestone" }
-            maven { url 'http://repo.spring.io/plugins-release' }
+            maven { url "http://msk1-vm-nexus01.unix.nspk.ru:8081/nexus/content/groups/public/" }
+            mavenLocal()
+//            jcenter()
+//            maven { url "http://repo.maven.apache.org/maven2" }
+//            maven { url "http://repo.spring.io/snapshot" }
+//            maven { url "http://repo.spring.io/milestone" }
+//            maven { url 'http://repo.spring.io/plugins-release' }
 //            maven { url 'http://repository.jboss.org/maven2' }
         }
         dependencies {
@@ -24,27 +26,31 @@ subprojects {
     apply plugin: 'java'
     //apply plugin: 'org.springframework.boot'
 
-    idea {
-        module {
-            downloadJavadoc = true
-            downloadSources = true
-        }
-    }
+//    idea {
+//        module {
+//            downloadJavadoc = true
+//            downloadSources = true
+//        }
+//    }
 
     sourceCompatibility = 1.8
 
     repositories {
-        jcenter()
-        //    mavenLocal()
+        maven { url "http://msk1-vm-nexus01.unix.nspk.ru:8081/nexus/content/groups/public/" }
+        mavenLocal()
     }
 
     dependencies {
         compile "com.hazelcast:hazelcast:3.7.3"
         compile "com.hazelcast:hazelcast-spring:3.7.3"
         compile "org.springframework.boot:spring-boot-starter:1.4.2.RELEASE"
+        compile "org.springframework.boot:spring-boot-configuration-processor:1.4.2.RELEASE"
 
         compile "ch.qos.logback:logback-classic:1.1.7"
         compile "org.slf4j:slf4j-api:1.7.21"
+
+        compile group: 'mysql', name: 'mysql-connector-java', version:'5.1.40'
+        compile group: 'com.tmax.tibero', name: 'tibero-jdbc', version:'5.0'
 
         testCompile "junit:junit:4.12"
         testCompile 'org.springframework.boot:spring-boot-starter-test:1.4.2.RELEASE'
