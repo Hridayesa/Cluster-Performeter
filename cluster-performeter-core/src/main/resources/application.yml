@@ -28,3 +28,5 @@ pump:
     srcUserID: frontoffice_fo
     srcPassword: q1
     srcStatement: select * from FF_OL_FOR_TEST
+dataProvider:
+    queueCapacity: 1000
