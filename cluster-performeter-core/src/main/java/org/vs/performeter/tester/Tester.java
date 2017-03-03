@@ -7,6 +7,8 @@ import org.vs.performeter.common.Statistics;
  */
 public interface Tester<S extends Statistics> {
 
+    void setContainerManager(ContainerManager containerManager);
+
     void doSingleTest();
 
     void beforeTests();

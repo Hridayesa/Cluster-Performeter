@@ -8,6 +8,8 @@ import org.vs.performeter.common.Statistics;
  */
 public abstract class AbstractTester<S extends Statistics, V extends StatisticsBuilder<S>> implements Tester<S> {
 
+    protected ContainerManager containerManager;
+
     @Autowired
     protected V statisticsBuilder;
 
@@ -24,5 +26,10 @@ public abstract class AbstractTester<S extends Statistics, V extends StatisticsB
     @Override
     public S getStatistics() {
         return statisticsBuilder.getStatistics();
+    }
+
+    @Override
+    public void setContainerManager(ContainerManager containerManager) {
+        this.containerManager = containerManager;
     }
 }

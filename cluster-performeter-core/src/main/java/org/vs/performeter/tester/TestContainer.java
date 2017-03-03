@@ -71,13 +71,14 @@ public class TestContainer implements Runnable {
     }
 
     private void doTest() {
-//        Long startMillis = System.currentTimeMillis();
+        tester.setContainerManager(new Manager());
         tester.beforeTests();
         LOG.info("STARTED !!!");
+
         while (!stopped) {
             taskExecutor.submit(() -> tester.doSingleTest());
-//            statistics.countPlusPlus();
         }
+
         taskExecutor.shutdown();
         try {
             taskExecutor.awaitTermination(5, TimeUnit.SECONDS);
@@ -86,8 +87,6 @@ public class TestContainer implements Runnable {
 
             saveStatistics(tester.getStatistics());
 
-    //        saveStatistics(System.currentTimeMillis() - startMillis);
-
             Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -95,6 +94,7 @@ public class TestContainer implements Runnable {
 
         finishCollectionLatch.countDown();
         LOG.info("DONE !!!");
+        tester.setContainerManager(null);
     }
 
 
@@ -102,5 +102,18 @@ public class TestContainer implements Runnable {
         statisticsMap.put(Integer.toString(id), statistics);
         LOG.info("## Statistics saved for id=" + id);
         LOG.info(statistics.toString());
+    }
+
+    class Manager implements ContainerManager{
+
+        @Override
+        public int getId() {
+            return id;
+        }
+
+        @Override
+        public void stop() {
+            stopped = true;
+        }
     }
 }

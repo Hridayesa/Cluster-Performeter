@@ -21,7 +21,7 @@ import javax.annotation.Resource;
 @ContextConfiguration(classes = {TesterMain.class})
 @BootstrapWith(SpringBootTestContextBootstrapper.class)
 public class DataModelTest {
-    @Resource(name = "def1DataProvider")
+    @Resource(name = "dummyMsgGenDataProvider")
     private DataProvider<Msg> dataProvider;
 
     @Test
