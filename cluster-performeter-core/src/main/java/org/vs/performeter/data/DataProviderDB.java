@@ -10,7 +10,7 @@ import java.util.concurrent.ArrayBlockingQueue;
 
 @Component
 @ConfigurationProperties(prefix = "dataProvider")
-public class DataProividerDB implements DataProvider<Probe> {
+public class DataProviderDB implements DataProvider<Probe> {
     private ArrayBlockingQueue<Probe> queue;
 
     @Resource(name = "DBReader")
@@ -25,7 +25,7 @@ public class DataProividerDB implements DataProvider<Probe> {
         this.queueCapacity = queueCapacity;
     }
 
-    public DataProividerDB() {
+    public DataProviderDB() {
         dbReader.setConsumer(this::offer);
         queue = new ArrayBlockingQueue<Probe>(queueCapacity);
     }
