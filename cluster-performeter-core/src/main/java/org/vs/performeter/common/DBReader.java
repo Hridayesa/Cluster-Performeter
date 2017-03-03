@@ -4,6 +4,7 @@ import com.tmax.tibero.jdbc.data.DataType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.ConfigurationPropertiesBinding;
 import org.springframework.stereotype.Component;
 
 import java.sql.*;
@@ -12,6 +13,8 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.function.Consumer;
 
+@Component
+@ConfigurationProperties(prefix = "pump")
 public class DBReader<P extends Probe> {
     private static Logger LOGGER = LoggerFactory.getLogger(DBReader.class);
     private static final String PARAMETER_PLACEHOLDER = "?";
@@ -27,8 +30,8 @@ public class DBReader<P extends Probe> {
     protected boolean srcIsOraSP;
     protected boolean srcNoBindVar;
 
-    protected String pumpMode;
-    protected boolean convertDates;
+    protected String pumpMode = ROW_BY_ROW_MODE;
+    protected boolean convertDates = false;
     protected Consumer<P> consumer;
     protected ProbeFactory<P> factory;
 
@@ -231,7 +234,7 @@ public class DBReader<P extends Probe> {
             while (rs.next()) {
                 consumer.accept(readRow(rs, rsMetaData));
                 rowCount++;
-                if (rowCount % 100 == 0) LOGGER.info(rowCount + " rows processed");
+                if (rowCount % 10000 == 0) LOGGER.info(rowCount + " rows processed");
             }
 
             return rowCount;
@@ -255,7 +258,7 @@ public class DBReader<P extends Probe> {
             while (rs.next()) {
                 rows.add(readRow(rs, rsMetaData));
                 rowCount++;
-                if (rowCount % 100 == 0) {
+                if (rowCount % 10000 == 0) {
                     LOGGER.info(rowCount + " rows read");
                 }
             }
@@ -267,7 +270,7 @@ public class DBReader<P extends Probe> {
             for (P row : rows) {
                 consumer.accept(row);
                 rowCount++;
-                if (rowCount % 100 == 0) LOGGER.info(rowCount + " rows consumed");
+                if (rowCount % 10000 == 0) LOGGER.info(rowCount + " rows consumed");
             }
 
             return rowCount;

@@ -23,7 +23,8 @@ public class HazelcastCacheTest extends AbstractTester<DefaultStatistics, Defaul
     @Resource private IMap testMap;
     private Random rn = new Random();
     private Integer maxNumberOfCacheElements;
-    DBReader reader;
+    @Resource(name = "DBReader")
+    DBReader<Probe> reader;
 
     public Integer getMaxNumberOfCacheElements() {
         return maxNumberOfCacheElements;
@@ -32,39 +33,38 @@ public class HazelcastCacheTest extends AbstractTester<DefaultStatistics, Defaul
         this.maxNumberOfCacheElements = maxNumberOfCacheElements;
     }
 
-    @ConfigurationProperties(prefix = "pump")
-    public DBReader dbReader() {
-        DBReader<Probe> reader = new DBReader<>();
-        reader.setFactory(new SimpleProbeFactory());
-        reader.setConsumer(this::addToCache);
-        return reader;
-    }
-
     public void addToCache(Probe probe){
-        testMap.put(probe.getKey(), probe);
+        try {
+            Object key = probe.getKey();
+            testMap.put(key, probe);
+        }catch (Exception ex) {
+            ex.printStackTrace();
+            throw ex;
+        }
     }
-
 
     @Override
     public void doSingleTest() {
         statisticsBuilder.countPlusPlus();
 
-//        reader = dbReader();
-//        reader.pump();
+        reader.setFactory(new SimpleProbeFactory());
+        reader.setConsumer(this::addToCache);
+        long t = System.currentTimeMillis();
+        reader.pump();
+        System.out.println("Total time = "+t+"msec");
 
-
-        int intKey = rn.nextInt(maxNumberOfCacheElements);
-        String key = Integer.toString(intKey);
-        testMap.lock(key);
-        try {
-
-            Integer limit = (Integer) testMap.get(key);
-            limit = (limit == null) ? 1 : limit + 1;
-            testMap.set(key, limit);
-
-        } finally {
-            testMap.unlock(key);
-        }
+//        int intKey = rn.nextInt(maxNumberOfCacheElements);
+//        String key = Integer.toString(intKey);
+//        testMap.lock(key);
+//        try {
+//
+//            Integer limit = (Integer) testMap.get(key);
+//            limit = (limit == null) ? 1 : limit + 1;
+//            testMap.set(key, limit);
+//
+//        } finally {
+//            testMap.unlock(key);
+//        }
     }
 
 }

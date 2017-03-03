@@ -23,8 +23,8 @@ performeter:
       type: CACHING_PROXY
       name: region
 pump:
-    srcDriverclass: com.tmax.tibero.jdbc.TbDriver
-    srcUrl: jdbc:tibero:thin:@10.31.20.54:8629:DWH
-    srcUser: frontoffice_fo
+    srcDriverClass: com.tmax.tibero.jdbc.TbDriver
+    srcURL: jdbc:tibero:thin:@10.31.20.54:8629:DWH
+    srcUserID: frontoffice_fo
     srcPassword: q1
-    srcSql: select * from FF_OL_FOR_TEST
+    srcStatement: select * from FF_OL_FOR_TEST
