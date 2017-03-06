@@ -1,9 +1,8 @@
-package org.vs.performeter.data;
+package org.vs.performeter.common;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
-
-import org.vs.performeter.common.*;
+import org.vs.performeter.data.DataProvider;
 
 import javax.annotation.Resource;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -25,7 +24,6 @@ public class DataProviderDB implements DataProvider<Probe> {
     }
 
     public DataProviderDB() {
-        dbReader.setConsumer(this::offer);
         queue = new ArrayBlockingQueue<Probe>(queueCapacity);
     }
 

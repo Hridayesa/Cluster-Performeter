@@ -3,9 +3,11 @@ package org.vs.performeter.tester;
 import com.hazelcast.core.IMap;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
+import org.vs.performeter.common.DBReaderProvider;
+import org.vs.performeter.common.DataProviderDB;
 import org.vs.performeter.common.DefaultStatistics;
 import org.vs.performeter.common.Probe;
-import org.vs.performeter.data.*;
+import org.vs.performeter.data.DataProvider;
 
 import javax.annotation.Resource;
 
@@ -18,14 +20,14 @@ public class HazelcastCacheTest extends AbstractTester<DefaultStatistics, Defaul
     @Resource private IMap testMap;
     private Integer maxNumberOfCacheElements;
 
-    @Resource(name = "DataProviderDB")
-    protected DataProviderDB provider;
+    @Resource(name = "DBReaderProvider")
+    protected DataProvider<Probe> provider;
 
-    public DataProviderDB getProvider() {
+    public DataProvider<Probe> getProvider() {
         return provider;
     }
 
-    public void setProvider(DataProviderDB provider) {
+    public void setProvider(DBReaderProvider provider) {
         this.provider = provider;
     }
 
