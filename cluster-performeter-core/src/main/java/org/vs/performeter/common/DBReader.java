@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 @Component
 @ConfigurationProperties(prefix = "pump")
@@ -32,7 +34,7 @@ public class DBReader<P extends Probe> {
 
     protected String pumpMode = ROW_BY_ROW_MODE;
     protected boolean convertDates = false;
-    protected Consumer<P> consumer;
+    protected Function<P, Boolean> consumer;
     protected ProbeFactory<P> factory;
 
     public void setSrcDriverClass(String srcDriverClass) {
@@ -75,7 +77,7 @@ public class DBReader<P extends Probe> {
         this.convertDates = convertDates;
     }
 
-    public void setConsumer(Consumer<P> consumer) {
+    public void setConsumer(Function<P, Boolean> consumer) {
         this.consumer = consumer;
     }
 
@@ -232,9 +234,13 @@ public class DBReader<P extends Probe> {
 
             long rowCount = 0;
             while (rs.next()) {
-                consumer.accept(readRow(rs, rsMetaData));
                 rowCount++;
-                if (rowCount % 10000 == 0) LOGGER.info(rowCount + " rows processed");
+                if (consumer.apply(readRow(rs, rsMetaData))) {
+                    if (rowCount % 10000 == 0) LOGGER.info(rowCount + " rows processed");
+                } else {
+                    LOGGER.info("Signal to finish loading");
+                    break;
+                }
             }
 
             return rowCount;
@@ -268,9 +274,14 @@ public class DBReader<P extends Probe> {
 
             rowCount = 0;
             for (P row : rows) {
-                consumer.accept(row);
                 rowCount++;
-                if (rowCount % 10000 == 0) LOGGER.info(rowCount + " rows consumed");
+                if (consumer.apply(row)) {
+                    rowCount++;
+                    if (rowCount % 10000 == 0) LOGGER.info(rowCount + " rows consumed");
+                } else {
+                    LOGGER.info("Signal to finish loading");
+                    break;
+                }
             }
 
             return rowCount;
@@ -303,5 +314,8 @@ public class DBReader<P extends Probe> {
         return factory.create();
     }
 
-    protected void closeDst(){};
+    protected void closeDst() {
+    }
+
+    ;
 }

@@ -30,8 +30,8 @@ public class DataProviderDB implements DataProvider<Probe> {
         queue = new ArrayBlockingQueue<Probe>(queueCapacity);
     }
 
-    public void offer(Probe probe) {
-        queue.offer(probe);
+    public Boolean offer(Probe probe) {
+        return queue.offer(probe);
     }
 
     @Override

@@ -23,7 +23,8 @@ public class HazelcastCacheTest extends AbstractTester<DefaultStatistics, Defaul
     @Resource private IMap testMap;
     private Integer maxNumberOfCacheElements;
     @Resource(name = "DBReader")
-    DBReader<Probe> reader;
+    private DBReader<Probe> reader;
+    private int count;
 
     public Integer getMaxNumberOfCacheElements() {
         return maxNumberOfCacheElements;
@@ -32,7 +33,7 @@ public class HazelcastCacheTest extends AbstractTester<DefaultStatistics, Defaul
         this.maxNumberOfCacheElements = maxNumberOfCacheElements;
     }
 
-    public void addToCache(Probe probe){
+    public Boolean addToCache(Probe probe){
         try {
             Object key = probe.getKey();
             testMap.put(key, probe);
@@ -40,10 +41,13 @@ public class HazelcastCacheTest extends AbstractTester<DefaultStatistics, Defaul
             ex.printStackTrace();
             throw ex;
         }
+        statisticsBuilder.countPlusPlus();
+        return ++count<maxNumberOfCacheElements;
     }
 
     @Override
     public void doSingleTest() {
+        count = 0;
         statisticsBuilder.countPlusPlus();
 
         reader.setFactory(new SimpleProbeFactory());
