@@ -5,6 +5,9 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 public class Probe implements Serializable {
+    public static final Probe ERROR_PROBE = new Probe();
+    public static final Probe END_PROBE = new Probe();
+
     public Object timein;
     public String f2;
     public String f3;

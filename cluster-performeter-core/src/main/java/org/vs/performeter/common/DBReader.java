@@ -17,7 +17,7 @@ import java.util.function.Predicate;
 
 @Component
 @ConfigurationProperties(prefix = "pump")
-public class DBReader<P extends Probe> {
+public class DBReader<P extends org.vs.performeter.common.Probe> {
     private static Logger LOGGER = LoggerFactory.getLogger(DBReader.class);
     private static final String PARAMETER_PLACEHOLDER = "?";
     private static final String ROW_BY_ROW_MODE = "row-by-row";
@@ -239,13 +239,14 @@ public class DBReader<P extends Probe> {
                     if (rowCount % 10000 == 0) LOGGER.info(rowCount + " rows processed");
                 } else {
                     LOGGER.info("Signal to finish loading");
-                    break;
+                    return rowCount;
                 }
             }
-
+            consumer.apply((P) Probe.END_PROBE);
             return rowCount;
         } catch (Exception ex) {
             ex.printStackTrace();
+            consumer.apply((P) Probe.ERROR_PROBE);
             throw new RuntimeException(ex);
         }
     }
@@ -279,15 +280,17 @@ public class DBReader<P extends Probe> {
                     rowCount++;
                     if (rowCount % 10000 == 0) LOGGER.info(rowCount + " rows consumed");
                 } else {
-                    LOGGER.info("Signal to finish loading");
-                    break;
+                    consumer.apply((P) Probe.ERROR_PROBE);
+                    return rowCount;
                 }
             }
+            consumer.apply((P) Probe.END_PROBE);
 
             return rowCount;
 
         } catch (Exception ex) {
             ex.printStackTrace();
+            consumer.apply((P) Probe.ERROR_PROBE);
             throw new RuntimeException(ex);
         }
     }
@@ -317,5 +320,7 @@ public class DBReader<P extends Probe> {
     protected void closeDst() {
     }
 
-    ;
+    public void stop() {
+
+    }
 }

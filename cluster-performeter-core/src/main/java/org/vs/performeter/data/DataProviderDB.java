@@ -12,7 +12,6 @@ import java.util.concurrent.ArrayBlockingQueue;
 @ConfigurationProperties(prefix = "dataProvider")
 public class DataProviderDB implements DataProvider<Probe> {
     private ArrayBlockingQueue<Probe> queue;
-
     @Resource(name = "DBReader")
     private DBReader<Probe> dbReader;
     private int queueCapacity = 1000;
@@ -35,7 +34,23 @@ public class DataProviderDB implements DataProvider<Probe> {
     }
 
     @Override
-    public Probe nextData() throws InterruptedException {
-        return queue.take();
+    public Probe nextData(){
+        try {
+            return queue.take();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            return Probe.ERROR_PROBE;
+        }
+    }
+
+    @Override
+    public void start() {
+        dbReader.setConsumer(this::offer);
+        dbReader.pump();
+    }
+
+    @Override
+    public void stop() {
+        dbReader.stop();
     }
 }
