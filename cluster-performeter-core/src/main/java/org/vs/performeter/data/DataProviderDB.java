@@ -2,8 +2,8 @@ package org.vs.performeter.data;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
-import org.vs.performeter.common.DBReader;
-import org.vs.performeter.common.Probe;
+
+import org.vs.performeter.common.*;
 
 import javax.annotation.Resource;
 import java.util.concurrent.ArrayBlockingQueue;

@@ -17,27 +17,23 @@ import javax.annotation.Resource;
 public class HazelcastCacheTest extends AbstractTester<DefaultStatistics, DefaultStatisticsBuilder> {
     @Resource private IMap testMap;
     private Integer maxNumberOfCacheElements;
+
     @Resource(name = "DataProviderDB")
-    DataProvider<Probe> provider;
-    private int count;
+    protected DataProviderDB provider;
+
+    public DataProviderDB getProvider() {
+        return provider;
+    }
+
+    public void setProvider(DataProviderDB provider) {
+        this.provider = provider;
+    }
 
     public Integer getMaxNumberOfCacheElements() {
         return maxNumberOfCacheElements;
     }
     public void setMaxNumberOfCacheElements(Integer maxNumberOfCacheElements) {
         this.maxNumberOfCacheElements = maxNumberOfCacheElements;
-    }
-
-    public Boolean addToCache(Probe probe){
-        try {
-            Object key = probe.getKey();
-            testMap.put(key, probe);
-        }catch (Exception ex) {
-            ex.printStackTrace();
-            throw ex;
-        }
-        statisticsBuilder.countPlusPlus();
-        return ++count<maxNumberOfCacheElements;
     }
 
     @Override
@@ -57,7 +53,6 @@ public class HazelcastCacheTest extends AbstractTester<DefaultStatistics, Defaul
 
     @Override
     public void doSingleTest() {
-        count = 0;
         Probe probe = provider.nextData();
         Object key = probe.getKey();
         testMap.lock(key);
