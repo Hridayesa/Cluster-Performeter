@@ -9,13 +9,12 @@ subprojects {
             springBootVersion = '1.4.2.RELEASE'
         }
         repositories {
-            maven { url "http://msk1-vm-nexus01.unix.nspk.ru:8081/nexus/content/groups/public/" }
+            jcenter()
             mavenLocal()
-//            jcenter()
-//            maven { url "http://repo.maven.apache.org/maven2" }
-//            maven { url "http://repo.spring.io/snapshot" }
-//            maven { url "http://repo.spring.io/milestone" }
-//            maven { url 'http://repo.spring.io/plugins-release' }
+            maven { url "http://repo.maven.apache.org/maven2" }
+            maven { url "http://repo.spring.io/snapshot" }
+            maven { url "http://repo.spring.io/milestone" }
+            maven { url 'http://repo.spring.io/plugins-release' }
 //            maven { url 'http://repository.jboss.org/maven2' }
         }
         dependencies {
@@ -36,8 +35,8 @@ subprojects {
     sourceCompatibility = 1.8
 
     repositories {
-        maven { url "http://msk1-vm-nexus01.unix.nspk.ru:8081/nexus/content/groups/public/" }
-        mavenLocal()
+        jcenter()
+        //    mavenLocal()
     }
 
     dependencies {
