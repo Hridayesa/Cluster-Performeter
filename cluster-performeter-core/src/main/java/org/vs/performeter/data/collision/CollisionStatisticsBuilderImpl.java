@@ -1,8 +1,8 @@
-package org.vs.performeter.tester;
+package org.vs.performeter.data.collision;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.vs.performeter.common.RedisCollisionStatistics;
+import org.vs.performeter.common.DefaultStatisticsBuilder;
 
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -10,7 +10,7 @@ import java.util.concurrent.atomic.AtomicLong;
  * Created by Denis Karpov on 09.12.2016.
  */
 @Component
-public class RedisCollisionStatisticsBuilder implements CollisionStatisticsBuilder<RedisCollisionStatistics> {
+public class CollisionStatisticsBuilderImpl implements CollisionStatisticsBuilder<CollisionStatistics> {
 
     private AtomicLong collisionCount = new AtomicLong(0);
 
@@ -38,8 +38,8 @@ public class RedisCollisionStatisticsBuilder implements CollisionStatisticsBuild
     }
 
     @Override
-    public RedisCollisionStatistics getStatistics() {
-        return new RedisCollisionStatistics(builder.getCount().get(),
+    public CollisionStatistics getStatistics() {
+        return new CollisionStatistics(builder.getCount().get(),
                 builder.getEndMillis()-builder.getStartMillis(),
                 collisionCount.get());
     }

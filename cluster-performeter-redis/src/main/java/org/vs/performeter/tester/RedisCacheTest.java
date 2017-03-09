@@ -5,6 +5,7 @@ import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 import org.vs.performeter.common.DefaultStatistics;
+import org.vs.performeter.common.DefaultStatisticsBuilder;
 
 import javax.annotation.Resource;
 import java.util.Random;

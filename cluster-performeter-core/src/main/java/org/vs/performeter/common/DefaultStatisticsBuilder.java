@@ -1,7 +1,7 @@
-package org.vs.performeter.tester;
+package org.vs.performeter.common;
 
 import org.springframework.stereotype.Component;
-import org.vs.performeter.common.DefaultStatistics;
+import org.vs.performeter.tester.StatisticsBuilder;
 
 import java.util.concurrent.atomic.AtomicLong;
 

@@ -1,9 +1,12 @@
 rootProject.name = 'cluster-performeter'
 include "cluster-performeter-core",
         "cluster-performeter-hazlecast",
+        "cluster-performeter-hazlecast-file",
         "cluster-performeter-hazlecast-optimistic",
         "cluster-performeter-geode",
         "cluster-performeter-redis",
         "cluster-performeter-redis-msg",
         "cluster-performeter-ignite",
         "cluster-performeter-infinispan"
+
+
