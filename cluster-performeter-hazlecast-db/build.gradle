@@ -6,6 +6,9 @@ apply plugin: 'org.springframework.boot'
 
 dependencies {
     compile project(':cluster-performeter-core')
+
+    compile group: 'mysql', name: 'mysql-connector-java', version:'5.1.40'
+    compile group: 'com.tmax.tibero', name: 'tibero-jdbc', version:'5.0'
 }
 
 // Генерация дистрибутива

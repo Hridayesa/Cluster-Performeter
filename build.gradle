@@ -49,9 +49,6 @@ subprojects {
         compile "ch.qos.logback:logback-classic:1.1.7"
         compile "org.slf4j:slf4j-api:1.7.21"
 
-        compile group: 'mysql', name: 'mysql-connector-java', version:'5.1.40'
-        compile group: 'com.tmax.tibero', name: 'tibero-jdbc', version:'5.0'
-
         testCompile "junit:junit:4.12"
         testCompile 'org.springframework.boot:spring-boot-starter-test:1.4.2.RELEASE'
 //      testCompile "org.springframework:spring-test:4.2.1.RELEASE"
