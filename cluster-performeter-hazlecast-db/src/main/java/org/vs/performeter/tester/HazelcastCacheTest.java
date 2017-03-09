@@ -3,10 +3,7 @@ package org.vs.performeter.tester;
 import com.hazelcast.core.IMap;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
-import org.vs.performeter.common.DBReaderProvider;
-import org.vs.performeter.common.DataProviderDB;
-import org.vs.performeter.common.DefaultStatistics;
-import org.vs.performeter.common.Probe;
+import org.vs.performeter.common.*;
 import org.vs.performeter.data.DataProvider;
 
 import javax.annotation.Resource;
@@ -41,13 +38,13 @@ public class HazelcastCacheTest extends AbstractTester<DefaultStatistics, Defaul
     @Override
     public void beforeTests() {
         super.beforeTests();
-        provider.start();
+        provider.open(0);
     }
 
     @Override
     public void afterTests() {
         try {
-            provider.stop();
+            provider.close();
         }finally {
             super.afterTests();
         }

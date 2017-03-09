@@ -36,14 +36,4 @@ public class DummyMsgGenDataProvider implements DataProvider<Msg> {
         String id = Integer.toString(random.nextInt(maxNumberOfCacheElements));
         return new Msg(id, "name" + id, getBlob());
     }
-
-    @Override
-    public void start() {
-
-    }
-
-    @Override
-    public void stop() {
-
-    }
 }

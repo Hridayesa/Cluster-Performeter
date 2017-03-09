@@ -7,8 +7,4 @@ public interface DataProvider<D> {
     default void open(int instanceId) {};
     default void close() {};
     D nextData();
-
-    void start();
-
-    void stop();
 }
