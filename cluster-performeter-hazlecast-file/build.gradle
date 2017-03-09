@@ -6,6 +6,9 @@ apply plugin: 'org.springframework.boot'
 
 dependencies {
     compile project(':cluster-performeter-core')
+
+    compile group: 'mysql', name: 'mysql-connector-java', version:'5.1.40'
+    compile group: 'com.tmax.tibero', name: 'tibero-jdbc', version:'5.0'
 }
 
 // Генерация дистрибутива
@@ -20,11 +23,13 @@ task moreStartScripts(type: CreateStartScripts) {
     outputDir = new File(project.buildDir, 'scripts')
     classpath = jar.outputs.files + project.configurations.runtime
 }
+//compileJava.dependsOn(processResources)
 
 applicationDistribution.into("bin") {
     from(moreStartScripts)
     fileMode = 0755
 }
+
 
 distributions {
     main {

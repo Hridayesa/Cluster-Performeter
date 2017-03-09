@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
+import org.vs.performeter.data.iso.Probe;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ import java.util.function.Function;
 
 @Component
 @ConfigurationProperties(prefix = "pump")
-public class DBReader<P extends org.vs.performeter.common.Probe> {
+public class DBReader<P extends Probe> {
     private static Logger LOGGER = LoggerFactory.getLogger(DBReader.class);
     private static final String PARAMETER_PLACEHOLDER = "?";
     private static final String ROW_BY_ROW_MODE = "row-by-row";

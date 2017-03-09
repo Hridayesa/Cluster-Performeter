@@ -1,8 +1,12 @@
 package org.vs.performeter.common;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 import org.vs.performeter.data.DataProvider;
+import org.vs.performeter.data.iso.Probe;
+import org.vs.performeter.tester.HazelcastCacheTest;
 
 import javax.annotation.Resource;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -10,10 +14,12 @@ import java.util.concurrent.ArrayBlockingQueue;
 @Component
 @ConfigurationProperties(prefix = "dataProvider")
 public class DataProviderDB implements DataProvider<Probe> {
+    private static Logger LOG = LoggerFactory.getLogger(DataProviderDB.class);
+
     private ArrayBlockingQueue<Probe> queue;
     @Resource(name = "DBReader")
     private DBReader<Probe> dbReader;
-    private int queueCapacity = 1000;
+    private int queueCapacity = 3000;
 
     public int getQueueCapacity() {
         return queueCapacity;
@@ -28,23 +34,31 @@ public class DataProviderDB implements DataProvider<Probe> {
     }
 
     public Boolean offer(Probe probe) {
-        return queue.offer(probe);
+        try {
+//            LOG.error("offer: queue.size = {}", queue.size());
+            queue.put(probe);
+            return true;
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override
     public Probe nextData(){
-        try {
-            return queue.take();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-            return Probe.ERROR_PROBE;
-        }
+//        LOG.error("nextData: queue.size = {}", queue.size());
+       return queue.poll();
     }
 
     @Override
     public void open(int instanceId) {
         dbReader.setConsumer(this::offer);
-        dbReader.pump();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                dbReader.pump();
+            }
+        }).start();
     }
 
     @Override

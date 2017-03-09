@@ -1,6 +1,6 @@
 performeter:
   orchestrator:
-    testDurationSeconds: 60
+    testDurationSeconds: 600
 
   executor:
     corePoolSize: 20
@@ -8,7 +8,7 @@ performeter:
     queueCapacity: 10
 
   hazlecast:
-    maxNumberOfCacheElements: 1000
+    maxNumberOfCacheElements: 2000
 
   redis:
     maxNumberOfCacheElements: 1000
@@ -26,4 +26,4 @@ pump:
     srcPassword: q1
     srcStatement: select env_timein,txn_f2,txn_f3,txn_f4,txn_f32,txn_f37,txn_f38,txn_f39,txn_f41,txn_f42,txn_f62_2 from FF_OL_FOR_TEST
 dataProvider:
-    queueCapacity: 1000
+    queueCapacity: 10000

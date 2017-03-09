@@ -8,19 +8,25 @@ import java.time.LocalDateTime;
  */
 public class Probe implements Serializable {
     private static final long serialVersionUID = -7230597394330499198L;
+    public static final Probe ERROR_PROBE = new Probe();
+    public static final Object END_PROBE = new Probe();
 
-    public final LocalDateTime timein;
-    public final String f2;
-    public final String f3;
-    public final String f4;
-    public final String f32;
-    public final String f37;
-    public final String f38;
-    public final String f39;
-    public final String f41;
-    public final String f42;
-    public final String f62_2;
-    private final String key;
+    public Object timein;
+    public String f2;
+    public String f3;
+    public String f4;
+    public String f32;
+    public String f37;
+    public String f38;
+    public String f39;
+    public String f41;
+    public String f42;
+    public String f62_2;
+    private String key;
+
+
+    public Probe() {
+    }
 
     public Probe(LocalDateTime timein, String f2, String f3, String f4, String f32, String f37, String f38, String f39, String f41, String f42, String f62_2) {
         this.timein = timein;
@@ -38,6 +44,9 @@ public class Probe implements Serializable {
     }
 
     public String getKey() {
+        if (key==null){
+            key = f32 + f37 + f41 + f42;
+        }
         return key;
     }
 
