@@ -1,4 +1,6 @@
 .idea/
+*.ipr
+*.iws
 .gradle/
 .build/
 */build/
