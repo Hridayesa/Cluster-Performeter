@@ -1,0 +1,21 @@
+performeter:
+  orchestrator:
+    testDurationSeconds: 600
+
+  executor:
+    corePoolSize: 20
+    maxPoolSize: 40
+    queueCapacity: 10
+
+  hazlecast:
+    maxNumberOfCacheElements: 1000
+
+  redis:
+    maxNumberOfCacheElements: 1000
+
+  geode:
+    host: QQQQQQQQQ
+    port: 10334
+    testregion:
+      type: CACHING_PROXY
+      name: region

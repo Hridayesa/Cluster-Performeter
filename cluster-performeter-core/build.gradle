@@ -3,6 +3,7 @@ group 'org.vs.performeter'
 version '1.0-SNAPSHOT'
 
 dependencies {
+    compile "com.univocity:univocity-parsers:2.3.1"
+
     testCompile()
 }
-

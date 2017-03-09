@@ -42,13 +42,13 @@ public class DataProviderDB implements DataProvider<Probe> {
     }
 
     @Override
-    public void start() {
+    public void open(int instanceId) {
         dbReader.setConsumer(this::offer);
         dbReader.pump();
     }
 
     @Override
-    public void stop() {
+    public void close() {
         dbReader.stop();
     }
 }

@@ -42,7 +42,7 @@ public class DBReaderProvider implements DataProvider<Probe> {
     }
 
     @Override
-    public void start() {
+    public void open(int instanceId) {
         dbReader.setFactory(new SimpleProbeFactory());
 
         dbReader.setConsumer(this::offer);
@@ -50,7 +50,7 @@ public class DBReaderProvider implements DataProvider<Probe> {
     }
 
     @Override
-    public void stop() {
+    public void close() {
         dbReader.stop();
     }
 }
