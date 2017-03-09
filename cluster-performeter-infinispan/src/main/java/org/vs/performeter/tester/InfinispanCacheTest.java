@@ -4,6 +4,7 @@ import org.infinispan.Cache;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 import org.vs.performeter.common.DefaultStatistics;
+import org.vs.performeter.common.DefaultStatisticsBuilder;
 
 import javax.annotation.Resource;
 import java.util.Random;

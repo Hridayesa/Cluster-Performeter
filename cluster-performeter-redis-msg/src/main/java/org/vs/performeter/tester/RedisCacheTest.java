@@ -4,8 +4,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
-import org.vs.performeter.common.RedisCollisionStatistics;
 import org.vs.performeter.data.DataProvider;
+import org.vs.performeter.data.collision.CollisionStatistics;
+import org.vs.performeter.data.collision.CollisionStatisticsBuilderImpl;
 import org.vs.performeter.data.dummy.Msg;
 
 import javax.annotation.Resource;
@@ -16,7 +17,7 @@ import java.util.Random;
  */
 @ConfigurationProperties(prefix = "performeter.redis")
 @Component
-public class RedisCacheTest extends AbstractTester<RedisCollisionStatistics, RedisCollisionStatisticsBuilder> {
+public class RedisCacheTest extends AbstractTester<CollisionStatistics, CollisionStatisticsBuilderImpl> {
     private Random random = new Random();
 
     @Resource(name = "dummyMsgGenDataProvider")

@@ -11,7 +11,8 @@ import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
  * Created by Denis Karpov on 02.12.2016.
  */
 @Configuration
-@ComponentScan("org.vs.performeter.data.dummy")
+@ComponentScan({"org.vs.performeter.data.dummy",
+        "org.vs.performeter.data.collision"})
 public class RedisConfiguration {
 
     @Bean
