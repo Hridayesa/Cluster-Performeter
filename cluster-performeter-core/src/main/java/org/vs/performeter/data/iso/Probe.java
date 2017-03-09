@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 public class Probe implements Serializable {
     private static final long serialVersionUID = -7230597394330499198L;
     public static final Probe ERROR_PROBE = new Probe();
-    public static final Object END_PROBE = new Probe();
+    public static final Probe END_PROBE = new Probe();
 
     public Object timein;
     public String f2;

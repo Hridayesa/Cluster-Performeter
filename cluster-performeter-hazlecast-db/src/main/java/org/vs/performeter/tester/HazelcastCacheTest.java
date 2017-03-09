@@ -49,13 +49,13 @@ public class HazelcastCacheTest extends AbstractTester<CollisionStatistics, Coll
     @Override
     public void beforeTests() {
         super.beforeTests();
-        provider.open(0);
-//        LOG.debug("open done.");
+        provider.open(containerManager.getId());
+        LOG.info("open done containerManager.getId()=", containerManager.getId());
     }
 
     @Override
     public void afterTests() {
-//        LOG.debug("afterTests called.");
+        LOG.info("afterTests called.");
         try {
             provider.close();
         }finally {
@@ -65,11 +65,15 @@ public class HazelcastCacheTest extends AbstractTester<CollisionStatistics, Coll
 
     @Override
     public void doSingleTest() {
-//        LOG.debug("doSingleTest called.");
 
         Probe probe = provider.nextData();
+        if (probe == null || probe==Probe.END_PROBE || probe==Probe.ERROR_PROBE) {
+            containerManager.stop();
+            return;
+        }
+
+
         Object key = probe.getKey();
-//        LOG.error("{}:key={}", ++cnt, key);
         testMap.lock(key);
         try {
             if (testMap.put(key, probe)==null) {

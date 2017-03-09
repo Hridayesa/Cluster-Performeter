@@ -36,7 +36,6 @@ public class DBReaderProvider implements DataProvider<Probe> {
 
     public Boolean offer(Probe probe) {
         try {
-//            LOG.error("put:{}", queue.size());
             return queue.offer(probe, 10, TimeUnit.SECONDS);
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -46,7 +45,6 @@ public class DBReaderProvider implements DataProvider<Probe> {
 
     @Override
     public Probe nextData(){
-//        LOG.error("nextData:{}", queue.size());
         try {
             return queue.poll(10, TimeUnit.SECONDS);
         } catch (InterruptedException e) {
