@@ -1,12 +1,11 @@
 package org.vs.performeter.data.providers;
 
-import java.sql.Types;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
-import org.vs.performeter.data.ProbeFactory;
 import org.vs.performeter.data.Probe;
+import org.vs.performeter.data.ProbeFactory;
 
 import java.sql.*;
 import java.util.ArrayList;
