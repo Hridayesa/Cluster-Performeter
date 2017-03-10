@@ -1,4 +1,4 @@
-package org.vs.performeter.data.iso;
+package org.vs.performeter.data;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;

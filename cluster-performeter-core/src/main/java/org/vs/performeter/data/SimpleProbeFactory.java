@@ -1,7 +1,6 @@
-package org.vs.performeter.common;
+package org.vs.performeter.data;
 
 import com.tmax.tibero.jdbc.data.DataType;
-import org.vs.performeter.data.iso.Probe;
 
 import java.time.LocalDateTime;
 

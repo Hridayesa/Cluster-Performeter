@@ -1,11 +1,12 @@
-package org.vs.performeter.common;
+package org.vs.performeter.data.providers;
 
 import com.tmax.tibero.jdbc.data.DataType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
-import org.vs.performeter.data.iso.Probe;
+import org.vs.performeter.data.ProbeFactory;
+import org.vs.performeter.data.Probe;
 
 import java.sql.*;
 import java.util.ArrayList;

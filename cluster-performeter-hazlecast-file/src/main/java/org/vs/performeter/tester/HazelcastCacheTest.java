@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import org.vs.performeter.data.DataProvider;
 import org.vs.performeter.data.collision.CollisionStatistics;
 import org.vs.performeter.data.collision.CollisionStatisticsBuilderImpl;
-import org.vs.performeter.data.iso.Probe;
+import org.vs.performeter.data.Probe;
 
 import javax.annotation.Resource;
 

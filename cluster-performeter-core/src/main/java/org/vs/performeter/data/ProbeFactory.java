@@ -1,6 +1,4 @@
-package org.vs.performeter.common;
-
-import org.vs.performeter.data.iso.Probe;
+package org.vs.performeter.data;
 
 import java.time.LocalDateTime;
 

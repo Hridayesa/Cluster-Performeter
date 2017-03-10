@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
  * Created by Denis Karpov on 06.12.2016.
  */
 @Configuration
-@ComponentScan({"org.vs.performeter.common",
+@ComponentScan({"org.vs.performeter.data.providers",
         "org.vs.performeter.data.collision"})
 public class HazelcastConfiguration {
     @Bean("testMap")
