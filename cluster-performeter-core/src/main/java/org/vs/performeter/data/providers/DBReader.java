@@ -1,10 +1,12 @@
-package org.vs.performeter.common;
+package org.vs.performeter.data.providers;
 
-import com.tmax.tibero.jdbc.data.DataType;
+import java.sql.Types;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
+import org.vs.performeter.data.ProbeFactory;
+import org.vs.performeter.data.Probe;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -14,7 +16,7 @@ import java.util.function.Function;
 
 @Component
 @ConfigurationProperties(prefix = "pump")
-public class DBReader<P extends org.vs.performeter.common.Probe> {
+public class DBReader<P extends Probe> {
     private static Logger LOGGER = LoggerFactory.getLogger(DBReader.class);
     private static final String PARAMETER_PLACEHOLDER = "?";
     private static final String ROW_BY_ROW_MODE = "row-by-row";
@@ -115,7 +117,7 @@ public class DBReader<P extends org.vs.performeter.common.Probe> {
                 srcStm = srcCallStm;
                 LOGGER.info("Source is Oracle Stored Procedure");
                 //1. Set input param
-                srcCallStm.registerOutParameter(1, DataType.CURSOR);
+                srcCallStm.registerOutParameter(1, Types.REF_CURSOR);
                 paramOffset = 2;
             } else {
                 srcStm = srcConn.prepareStatement(statementText);
@@ -296,7 +298,7 @@ public class DBReader<P extends org.vs.performeter.common.Probe> {
         for (int i = 1; i <= rsMetaData.getColumnCount(); i++) {
             int type = rsMetaData.getColumnType(i);
             String columnName = rsMetaData.getColumnName(i);
-            if (type == DataType.DATE || type == DataType.TIMESTAMP || type == DataType.TIMESTAMP_TZ || type == DataType.TIMESTAMP_LTZ) {
+            if (type == Types.DATE || type == Types.TIMESTAMP || type == Types.TIMESTAMP_WITH_TIMEZONE) {
                 Timestamp ts;
                 if (convertDates) {
                     ts = rs.getTimestamp(i, srcCalendar);

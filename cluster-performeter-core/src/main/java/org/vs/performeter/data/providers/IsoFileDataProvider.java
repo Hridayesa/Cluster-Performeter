@@ -1,10 +1,10 @@
-package org.vs.performeter.data.iso.file;
+package org.vs.performeter.data.providers;
 
 import com.univocity.parsers.csv.CsvParser;
 import com.univocity.parsers.csv.CsvParserSettings;
 import org.springframework.stereotype.Component;
 import org.vs.performeter.data.DataProvider;
-import org.vs.performeter.data.iso.Probe;
+import org.vs.performeter.data.Probe;
 
 import java.io.BufferedReader;
 import java.io.IOException;

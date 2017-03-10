@@ -1,10 +1,13 @@
-package org.vs.performeter.common;
-
+package org.vs.performeter.data;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+/**
+ * Created by Denis Karpov on 06.03.2017.
+ */
 public class Probe implements Serializable {
+    private static final long serialVersionUID = -7230597394330499198L;
     public static final Probe ERROR_PROBE = new Probe();
     public static final Probe END_PROBE = new Probe();
 
@@ -19,10 +22,29 @@ public class Probe implements Serializable {
     public String f41;
     public String f42;
     public String f62_2;
-    private volatile String key;
+    private String key;
 
-    public Object getKey() {
-        if (key==null) {
+
+    public Probe() {
+    }
+
+    public Probe(LocalDateTime timein, String f2, String f3, String f4, String f32, String f37, String f38, String f39, String f41, String f42, String f62_2) {
+        this.timein = timein;
+        this.f2 = f2;
+        this.f3 = f3;
+        this.f4 = f4;
+        this.f32 = f32;
+        this.f37 = f37;
+        this.f38 = f38;
+        this.f39 = f39;
+        this.f41 = f41;
+        this.f42 = f42;
+        this.f62_2 = f62_2;
+        this.key = f32 + f37 + f41 + f42;
+    }
+
+    public String getKey() {
+        if (key==null){
             key = f32 + f37 + f41 + f42;
         }
         return key;
