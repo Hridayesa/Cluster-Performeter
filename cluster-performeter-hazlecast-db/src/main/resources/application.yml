@@ -9,6 +9,7 @@ performeter:
 
   hazlecast:
     maxNumberOfCacheElements: 2000
+    testersCount: 10
 
   redis:
     maxNumberOfCacheElements: 1000

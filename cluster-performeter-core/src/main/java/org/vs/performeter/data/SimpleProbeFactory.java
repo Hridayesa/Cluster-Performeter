@@ -1,7 +1,6 @@
 package org.vs.performeter.data;
 
-import com.tmax.tibero.jdbc.data.DataType;
-
+import java.sql.Types;
 import java.time.LocalDateTime;
 
 public class SimpleProbeFactory implements ProbeFactory<Probe> {
@@ -21,7 +20,7 @@ public class SimpleProbeFactory implements ProbeFactory<Probe> {
 
     @Override
     public void setTimestamp(String columnName, LocalDateTime localDateTime) {
-        setObject(columnName, localDateTime, DataType.TIMESTAMP);
+        setObject(columnName, localDateTime, Types.TIMESTAMP);
     }
 
     @Override

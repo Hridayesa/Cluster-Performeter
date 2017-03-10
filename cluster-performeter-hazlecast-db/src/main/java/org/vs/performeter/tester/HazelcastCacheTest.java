@@ -28,6 +28,7 @@ public class HazelcastCacheTest extends AbstractTester<CollisionStatistics, Coll
 
     @Resource(name = "DBReaderProvider")
     protected DataProvider<Probe> provider;
+    private volatile boolean started;
 
     public DataProvider<Probe> getProvider() {
         return provider;
@@ -46,30 +47,30 @@ public class HazelcastCacheTest extends AbstractTester<CollisionStatistics, Coll
 
     @Override
     public void beforeTests() {
-        super.beforeTests();
         provider.open(containerManager.getId());
         LOG.info("open done containerManager.getId()=", containerManager.getId());
+//        super.beforeTests();
     }
 
     @Override
     public void afterTests() {
+//        super.afterTests();
         LOG.info("afterTests called.");
-        try {
-            provider.close();
-        }finally {
-            super.afterTests();
-        }
+        provider.close();
     }
 
     @Override
     public void doSingleTest() {
-
         Probe probe = provider.nextData();
+        if (!started){
+            started=true;
+            super.beforeTests();
+        }
         if (probe == null || probe==Probe.END_PROBE || probe==Probe.ERROR_PROBE) {
+            statisticsBuilder.stop();
             containerManager.stop();
             return;
         }
-
 
         Object key = probe.getKey();
         testMap.lock(key);
