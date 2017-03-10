@@ -6,9 +6,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 import org.vs.performeter.data.DataProvider;
+import org.vs.performeter.data.Probe;
 import org.vs.performeter.data.collision.CollisionStatistics;
 import org.vs.performeter.data.collision.CollisionStatisticsBuilderImpl;
-import org.vs.performeter.data.Probe;
 import org.vs.performeter.data.providers.DBReaderProvider;
 
 import javax.annotation.Resource;
