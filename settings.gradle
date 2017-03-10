@@ -9,4 +9,5 @@ include "cluster-performeter-core",
         "cluster-performeter-redis-file",
         "cluster-performeter-redis-msg",
         "cluster-performeter-ignite",
-        "cluster-performeter-infinispan"
+        "cluster-performeter-infinispan",
+        "cluster-performeter-infinispan-file"
