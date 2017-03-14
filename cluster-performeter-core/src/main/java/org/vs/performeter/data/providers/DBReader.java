@@ -180,7 +180,7 @@ public class DBReader<P extends Probe> {
     }
 
 
-    private static Connection connect(String driverClass, String jdbcUrl, String userId, String password) throws SQLException {
+    public static Connection connect(String driverClass, String jdbcUrl, String userId, String password) throws SQLException {
         try {
             Class.forName(driverClass);
         } catch (ClassNotFoundException ex) {
