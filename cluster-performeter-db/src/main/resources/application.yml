@@ -25,8 +25,9 @@ performeter:
     dstURL: jdbc:tibero:thin:@10.31.20.54:8629:DWH
     dstUserID: frontoffice_fo
     dstPassword: q1
-    insertStatement: insert into FF_OL_MAP_TEST(key, env_timein,txn_f2,txn_f3,txn_f4,txn_f32,txn_f37,txn_f38,txn_f39,txn_f41,txn_f42,txn_f62_2) values(?, ?,?,?,?,?,?,?,?,?,?)
-    searchStatement: select 1 from FF_OL_MAP_TEST where key=?
+    insertStatement: insert into FF_OL_M_TEST(k) values(?)
+    insertStatement2: insert into FF_OL_MAP_TEST(key, env_timein,txn_f2,txn_f3,txn_f4,txn_f32,txn_f37,txn_f38,txn_f39,txn_f41,txn_f42,txn_f62_2) values(?, ?,?,?,?,?,?,?,?,?,?)
+    searchStatement: select 1 from FF_OL_M_TEST where k=?
 pump:
     srcDriverClass: com.tmax.tibero.jdbc.TbDriver
     srcURL: jdbc:tibero:thin:@10.31.20.54:8629:DWH

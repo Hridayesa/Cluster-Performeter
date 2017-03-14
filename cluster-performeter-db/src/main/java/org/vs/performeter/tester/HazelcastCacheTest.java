@@ -76,18 +76,21 @@ public class HazelcastCacheTest extends AbstractTester<CollisionStatistics, Coll
         provider.close();
         if (insert != null) try {
             insert.close();
+            insert=null;
         } catch (SQLException e) {
             LOG.error("Error closing insert", e);
         }
 
         if (search != null) try {
             search.close();
+            search=null;
         } catch (SQLException e) {
             LOG.error("Error closing search", e);
         }
 
         if (dstConn != null) try {
             dstConn.close();
+            dstConn=null;
         } catch (SQLException ex) {
             LOG.error("Error closing destination connection", ex);
         }
@@ -133,9 +136,12 @@ public class HazelcastCacheTest extends AbstractTester<CollisionStatistics, Coll
 
         try {
             insert.setObject(1, key);
-            LOG.info("Inserted records {}", insert.executeUpdate());
+            insert.execute();
+//            LOG.info("Inserted records {}", insert.executeUpdate());
         } catch (SQLException e) {
             e.printStackTrace();
+            afterTests();
+            throw new RuntimeException(e);
         } finally {
         }
         cnt++;
