@@ -2,6 +2,7 @@ package org.vs.performeter.data.providers;
 
 import com.univocity.parsers.csv.CsvParser;
 import com.univocity.parsers.csv.CsvParserSettings;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 import org.vs.performeter.data.DataProvider;
 import org.vs.performeter.data.Probe;
@@ -20,11 +21,13 @@ import java.time.format.DateTimeFormatter;
  * Created by Denis Karpov on 06.03.2017.
  */
 @Component
+@ConfigurationProperties(prefix = "dataProvider")
 public class IsoFileDataProvider implements DataProvider<Probe> {
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     BufferedReader reader;
     CsvParser parser;
-    private String baseFileNameTemplate = "d:\\Download\\Redis_data\\data{0}.csv";
+    public String baseFileNameTemplate = "D:\\Download\\Redis_data\\data{0}.csv";
+//    private String baseFileNameTemplate;// = "/usr/cluster-performer/Redis_data/data{0}.csv";
 
     public String getBaseFileNameTemplate() {
         return baseFileNameTemplate;

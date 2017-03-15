@@ -24,3 +24,5 @@ performeter:
     testregion:
       type: CACHING_PROXY
       name: region
+dataProvider:
+    baseFileNameTemplate: D:\\Download\\Redis_data\\data{0}.csv

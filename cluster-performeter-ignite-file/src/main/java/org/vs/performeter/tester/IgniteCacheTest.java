@@ -1,6 +1,8 @@
 package org.vs.performeter.tester;
 
 import org.apache.ignite.IgniteCache;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 import org.vs.performeter.data.DataProvider;
@@ -17,11 +19,15 @@ import java.util.concurrent.locks.Lock;
 @ConfigurationProperties(prefix = "performeter.ignite")
 @Component
 public class IgniteCacheTest extends AbstractTester<CollisionStatistics, CollisionStatisticsBuilderImpl> {
+    private static Logger LOG = LoggerFactory.getLogger(IgniteCacheTest.class);
+
     @Resource(name = "isoFileDataProvider")
     private DataProvider<Probe> dataProvider;
 
     @Resource
-    IgniteCache<String,Probe> counter;
+    IgniteCache<String, Probe> counter;
+
+    int cnt = 1;
 
 
     @Override
@@ -35,19 +41,31 @@ public class IgniteCacheTest extends AbstractTester<CollisionStatistics, Collisi
 
         statisticsBuilder.countPlusPlus();
 
-        Lock lock = counter.lock(key);
-        lock.lock();
         try {
-
-            Probe limit = counter.get(key);
-            if (limit!=null) {
+            if (!counter.putIfAbsent(key, obj)) {
                 statisticsBuilder.collisionPlusPlus();
-            }else {
-                counter.put(key, limit);
             }
+        } catch (Exception ex) {
+            LOG.error("Error plasing to map", ex);
+        }
 
-        } finally {
-            lock.unlock();
+//        Lock lock = counter.lock(key);
+//        lock.lock();
+//        try {
+//
+//            Probe limit = counter.get(key);
+//            if (limit != null) {
+//                statisticsBuilder.collisionPlusPlus();
+//            } else {
+//                counter.put(key, obj);
+//            }
+//        }catch (Exception ex){
+//            LOG.error("Error plasing to map", ex);
+//        } finally {
+//            lock.unlock();
+//        }
+        if (cnt++ % 10000 == 0) {
+            LOG.info("Map size = {}/{}", counter.size(), counter.localSize());
         }
     }
 

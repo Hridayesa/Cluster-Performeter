@@ -30,3 +30,4 @@ pump:
     srcStatement: select * from FF_OL_FOR_TEST
 dataProvider:
     queueCapacity: 1000
+    baseFileNameTemplate: D:\\Download\\Redis_data\\data{0}.csv

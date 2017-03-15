@@ -1,6 +1,8 @@
 package org.vs.performeter.tester;
 
 import com.hazelcast.core.IMap;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 import org.vs.performeter.data.DataProvider;
@@ -16,10 +18,14 @@ import javax.annotation.Resource;
 @Component
 @ConfigurationProperties(prefix = "performeter.hazlecast")
 public class HazelcastCacheTest extends AbstractTester<CollisionStatistics, CollisionStatisticsBuilderImpl> {
+    private Logger LOG = LoggerFactory.getLogger(HazelcastCacheTest.class);
+
     @Resource
     private IMap testMap;
     @Resource(name = "isoFileDataProvider")
     private DataProvider<Probe> dataProvider;
+    private int cnt;
+
 
     @Override
     public void beforeTests() {
@@ -42,15 +48,18 @@ public class HazelcastCacheTest extends AbstractTester<CollisionStatistics, Coll
         String key = obj.getKey();
 
         statisticsBuilder.countPlusPlus();
-        testMap.lock(key);
         try {
 
-            if (testMap.put(key, obj) != null) {
+            if (testMap.putIfAbsent(key, obj) != null) {
                 statisticsBuilder.collisionPlusPlus();
             }
 
-        } finally {
-            testMap.unlock(key);
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
+        if (cnt++ % 10000 == 0) {
+            LOG.info("Map size = {}", testMap.size(), testMap);
+        }
+
     }
 }

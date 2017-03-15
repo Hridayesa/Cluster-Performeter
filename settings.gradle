@@ -11,5 +11,4 @@ include "cluster-performeter-core",
         "cluster-performeter-ignite",
         "cluster-performeter-ignite-file",
         "cluster-performeter-infinispan",
-        "cluster-performeter-infinispan-file",
-        "cluster-performeter-db"
+        "cluster-performeter-infinispan-file"
