@@ -26,7 +26,7 @@ public class IsoFileDataProvider implements DataProvider<Probe> {
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     BufferedReader reader;
     CsvParser parser;
-    public String baseFileNameTemplate = "D:\\Download\\Redis_data\\data{0}.csv";
+    public String baseFileNameTemplate; // = "D:\\Download\\Redis_data\\data{0}.csv";
 //    private String baseFileNameTemplate;// = "/usr/cluster-performer/Redis_data/data{0}.csv";
 
     public String getBaseFileNameTemplate() {
