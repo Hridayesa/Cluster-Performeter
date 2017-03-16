@@ -1,5 +1,7 @@
 package org.vs.performeter.tester;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -17,8 +19,10 @@ import javax.annotation.Resource;
 @Component
 @ConfigurationProperties(prefix = "performeter.hazlecast")
 public class RedisCacheTest extends AbstractTester<CollisionStatistics, CollisionStatisticsBuilderImpl> {
+    Logger LOG = LoggerFactory.getLogger("RedisCacheTest");
     @Resource(name = "isoFileDataProvider")
     private DataProvider<Probe> dataProvider;
+    int i = 0;
 
     HashOperations<String, String, Probe> hashOperations;
 
@@ -48,9 +52,19 @@ public class RedisCacheTest extends AbstractTester<CollisionStatistics, Collisio
         String key = obj.getKey();
 
         statisticsBuilder.countPlusPlus();
-        if (!hashOperations.putIfAbsent("QQQ", key, obj)) {
-            statisticsBuilder.collisionPlusPlus();
+        try {
+            if (!hashOperations.putIfAbsent("QQQ", key, obj)) {
+                statisticsBuilder.collisionPlusPlus();
+            }
+        }catch(Exception ex){
+            ex.printStackTrace();
         }
-
+        if (++i%10_000==0){
+            if (i%100_000==0){
+                LOG.info("size = {}", hashOperations.size("QQQ"));
+            }else{
+                LOG.info("i = {}", i);
+            }
+        }
     }
 }

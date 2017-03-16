@@ -12,7 +12,8 @@ performeter:
 
   redis:
     maxNumberOfCacheElements: 1000
-
+    host: ws267
+    port: 26379
   geode:
     host: QQQQQQQQQ
     port: 10334
