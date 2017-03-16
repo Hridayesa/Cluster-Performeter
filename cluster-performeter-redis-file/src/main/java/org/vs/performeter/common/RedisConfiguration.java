@@ -1,5 +1,6 @@
 package org.vs.performeter.common;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -20,13 +21,16 @@ public class RedisConfiguration {
     private String host;
     private int port;
 
-    //    @Bean
-//    public RedisConnectionFactory jedisConnectionFactory() {
-//        RedisSentinelConfiguration sentinelConfig = new RedisSentinelConfiguration() .master("mymaster")
-//                .sentinel(host, port);
-//        return new JedisConnectionFactory(sentinelConfig);
-//    }
     @Bean
+    @ConditionalOnProperty(prefix = "performeter.redis", name="connector", havingValue = "sentinel")
+    public RedisConnectionFactory jedisConnectionFactory() {
+        RedisSentinelConfiguration sentinelConfig = new RedisSentinelConfiguration() .master("mymaster")
+                .sentinel(host, port);
+        return new JedisConnectionFactory(sentinelConfig);
+    }
+
+    @Bean
+    @ConditionalOnProperty(prefix = "performeter.redis", name="connector", havingValue = "lettuce")
     public LettuceConnectionFactory lettuceConnectionFactory() {
         LettuceConnectionFactory lettuceConnectionFactory = new LettuceConnectionFactory();
         lettuceConnectionFactory.setHostName(host);
