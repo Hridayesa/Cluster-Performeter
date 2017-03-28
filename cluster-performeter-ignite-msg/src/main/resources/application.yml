@@ -12,9 +12,11 @@ performeter:
 
   redis:
     maxNumberOfCacheElements: 1000
-    host: ws267
-    port: 26379
-    connector: lettuce
+    hostName: localhost
+    port:     6379
+
+  ignite:
+    maxNumberOfCacheElements: 1000
 
   geode:
     host: QQQQQQQQQ
@@ -23,7 +25,7 @@ performeter:
       type: CACHING_PROXY
       name: region
 
-  dataprovider:
+  dataProvid11er:
     maxNumberOfCacheElements: 1000000
     blob: 1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890
           1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890

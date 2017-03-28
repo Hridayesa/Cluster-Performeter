@@ -5,10 +5,8 @@ apply plugin: 'application'
 
 dependencies {
     compile project(':cluster-performeter-core')
-//    compile 'biz.paluch.redis:lettuce:4.3.0.Final'
-    compile 'biz.paluch.redis:lettuce:3.4.+'
-    compile 'org.springframework.data:spring-data-redis:1.7.+'
-    compile 'org.springframework.boot:spring-boot-starter-data-redis:1.4.2.RELEASE'
+    compile 'org.apache.ignite:ignite-core:1.7.0'
+    compile 'org.apache.ignite:ignite-spring:1.7.0'
 }
 
 // Генерация дистрибутива

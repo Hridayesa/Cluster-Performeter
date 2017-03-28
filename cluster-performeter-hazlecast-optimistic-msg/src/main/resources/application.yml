@@ -8,13 +8,10 @@ performeter:
     queueCapacity: 10
 
   hazlecast:
-    maxNumberOfCacheElements: 1000
+    maxNumberOfCacheElements: 500000
 
   redis:
     maxNumberOfCacheElements: 1000
-    host: ws267
-    port: 26379
-    connector: lettuce
 
   geode:
     host: QQQQQQQQQ
