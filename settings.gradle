@@ -14,4 +14,5 @@ include "cluster-performeter-core",
         "cluster-performeter-ignite-msg",
         "cluster-performeter-ignite-file",
         "cluster-performeter-infinispan",
+        "cluster-performeter-infinispan-msg",
         "cluster-performeter-infinispan-file"
