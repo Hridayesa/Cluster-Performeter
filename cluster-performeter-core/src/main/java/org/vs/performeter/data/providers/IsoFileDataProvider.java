@@ -54,9 +54,10 @@ public class IsoFileDataProvider implements DataProvider<Probe> {
         try {
             close();
 
-            Path path = Paths.get(envFileName);
-            data = Files.readAllBytes(path);
-
+            if (envFileName!=null) {
+                Path path = Paths.get(envFileName);
+                data = Files.readAllBytes(path);
+            }
             Charset charset = Charset.forName("windows-1251");
             String srcFileName = MessageFormat.format(baseFileNameTemplate, instanceId);
             Path srcPath = Paths.get(srcFileName);
