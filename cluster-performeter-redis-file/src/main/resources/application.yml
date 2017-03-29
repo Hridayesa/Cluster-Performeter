@@ -23,3 +23,4 @@ performeter:
       name: region
 dataProvider:
   baseFileNameTemplate: C:\\hc\\data{0}.csv
+  envFileName: C:\\hc\\env1.ser

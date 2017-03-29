@@ -8,6 +8,7 @@ import org.vs.performeter.data.DataProvider;
 import org.vs.performeter.data.Probe;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -27,7 +28,18 @@ public class IsoFileDataProvider implements DataProvider<Probe> {
     BufferedReader reader;
     CsvParser parser;
     public String baseFileNameTemplate; // = "D:\\Download\\Redis_data\\data{0}.csv";
+    public String envFileName;
+    private byte[] data;
 //    private String baseFileNameTemplate;// = "/usr/cluster-performer/Redis_data/data{0}.csv";
+
+
+    public String getEnvFileName() {
+        return envFileName;
+    }
+
+    public void setEnvFileName(String envFileName) {
+        this.envFileName = envFileName;
+    }
 
     public String getBaseFileNameTemplate() {
         return baseFileNameTemplate;
@@ -41,6 +53,9 @@ public class IsoFileDataProvider implements DataProvider<Probe> {
     public void open(int instanceId) {
         try {
             close();
+
+            Path path = Paths.get(envFileName);
+            data = Files.readAllBytes(path);
 
             Charset charset = Charset.forName("windows-1251");
             String srcFileName = MessageFormat.format(baseFileNameTemplate, instanceId);
@@ -81,6 +96,9 @@ public class IsoFileDataProvider implements DataProvider<Probe> {
             if (line != null) {
                 res = createObj(line);
             }
+        }
+        if (data!=null && res!=null){
+            res.data = data.clone();
         }
         return res;
     }

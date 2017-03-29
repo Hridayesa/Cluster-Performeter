@@ -64,8 +64,8 @@ public class IgniteCacheTest extends AbstractTester<CollisionStatistics, Collisi
 //        } finally {
 //            lock.unlock();
 //        }
-        if (cnt++ % 10000 == 0) {
-            LOG.info("Map size = {}/{}", counter.size(), counter.localSize());
+        if (cnt++ % 100_000 == 0) {
+            LOG.info("Map size = {}", cnt);
         }
     }
 

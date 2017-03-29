@@ -58,6 +58,7 @@ public class RedisCacheTest extends AbstractTester<CollisionStatistics, Collisio
             }
         }catch(Exception ex){
             ex.printStackTrace();
+            System.exit(-1);
         }
         if (++i%10_000==0){
             if (i%100_000==0){

@@ -25,4 +25,5 @@ performeter:
       type: CACHING_PROXY
       name: region
 dataProvider:
-  baseFileNameTemplate: D:\\Download\\Redis_data\\data{0}.csv
+  baseFileNameTemplate: C:\\hc\\data{0}.csv
+  envFileName: C:\\hc\\env1.ser

@@ -23,6 +23,7 @@ public class Probe implements Serializable {
     public String f42;
     public String f62_2;
     private String key;
+    public byte[] data;
 
 
     public Probe() {
