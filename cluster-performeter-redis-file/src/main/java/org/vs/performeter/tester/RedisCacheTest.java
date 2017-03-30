@@ -12,6 +12,7 @@ import org.vs.performeter.data.collision.CollisionStatistics;
 import org.vs.performeter.data.collision.CollisionStatisticsBuilderImpl;
 
 import javax.annotation.Resource;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * Created by Denis Karpov on 14.09.2015.
@@ -22,7 +23,7 @@ public class RedisCacheTest extends AbstractTester<CollisionStatistics, Collisio
     Logger LOG = LoggerFactory.getLogger("RedisCacheTest");
     @Resource(name = "isoFileDataProvider")
     private DataProvider<Probe> dataProvider;
-    int i = 0;
+    static AtomicLong i = new AtomicLong();
 
     HashOperations<String, String, Probe> hashOperations;
 
@@ -56,16 +57,12 @@ public class RedisCacheTest extends AbstractTester<CollisionStatistics, Collisio
             if (!hashOperations.putIfAbsent("QQQ", key, obj)) {
                 statisticsBuilder.collisionPlusPlus();
             }
-        }catch(Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
             System.exit(-1);
         }
-        if (++i%10_000==0){
-            if (i%100_000==0){
-                LOG.info("size = {}", hashOperations.size("QQQ"));
-            }else{
-                LOG.info("i = {}", i);
-            }
+        if (i.incrementAndGet() % 100_000 == 0) {
+            LOG.info("i = {}", i.get());
         }
     }
 }

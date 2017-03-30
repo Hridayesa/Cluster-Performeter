@@ -32,14 +32,14 @@ public class IgniteTesterConfiguration {
     }
 
     @Bean(name = "counter")
-    public IgniteCache<String,Msg> counter() {
+    public IgniteCache<String,Object> counter() {
         CacheConfiguration cacheConfiguration = new CacheConfiguration("qqq");
 
         // ---  Locks works only with CacheAtomicityMode.TRANSACTIONAL
         cacheConfiguration.setAtomicityMode(CacheAtomicityMode.TRANSACTIONAL);
 
 //        IgniteCache<Integer, Integer> qqq = ignite().createCache(cacheConfiguration);
-        IgniteCache<String,Msg> qqq = ignite().getOrCreateCache(cacheConfiguration);
+        IgniteCache<String,Object> qqq = ignite().getOrCreateCache(cacheConfiguration);
         return qqq;
     }
 }
