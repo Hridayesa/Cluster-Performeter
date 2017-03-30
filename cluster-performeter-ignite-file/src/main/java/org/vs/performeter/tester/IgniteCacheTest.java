@@ -11,7 +11,6 @@ import org.vs.performeter.data.collision.CollisionStatistics;
 import org.vs.performeter.data.collision.CollisionStatisticsBuilderImpl;
 
 import javax.annotation.Resource;
-import java.util.concurrent.locks.Lock;
 
 /**
  * Created by Denis Karpov on 02.12.2016.
@@ -21,63 +20,42 @@ import java.util.concurrent.locks.Lock;
 public class IgniteCacheTest extends AbstractTester<CollisionStatistics, CollisionStatisticsBuilderImpl> {
     private static Logger LOG = LoggerFactory.getLogger(IgniteCacheTest.class);
 
-    @Resource(name = "isoFileDataProvider")
-    private DataProvider<Probe> dataProvider;
-
     @Resource
-    IgniteCache<String, Probe> counter;
+    IgniteCache<String, Object> counter;
 
-    int cnt = 1;
+    @Resource(name = "isoFileDataProvider")
+    private DataProvider<Probe> probeDataProvider;
 
 
     @Override
     public void doSingleTest() {
-        Probe obj = dataProvider.nextData();
-        if (obj == null) {
+        Probe probe = probeDataProvider.nextData();
+        if (probe == null) {
             containerManager.stop();
             return;
         }
-        String key = obj.getKey();
-
         statisticsBuilder.countPlusPlus();
 
+
         try {
-            if (!counter.putIfAbsent(key, obj)) {
+            if (!counter.putIfAbsent(probe.getKey(), probe)) {
                 statisticsBuilder.collisionPlusPlus();
             }
         } catch (Exception ex) {
             LOG.error("Error plasing to map", ex);
-        }
-
-//        Lock lock = counter.lock(key);
-//        lock.lock();
-//        try {
-//
-//            Probe limit = counter.get(key);
-//            if (limit != null) {
-//                statisticsBuilder.collisionPlusPlus();
-//            } else {
-//                counter.put(key, obj);
-//            }
-//        }catch (Exception ex){
-//            LOG.error("Error plasing to map", ex);
-//        } finally {
-//            lock.unlock();
-//        }
-        if (cnt++ % 100_000 == 0) {
-            LOG.info("Map size = {}", cnt);
         }
     }
 
     @Override
     public void beforeTests() {
         super.beforeTests();
-        dataProvider.open(containerManager.getId());
+        probeDataProvider.open(containerManager.getId());
     }
 
     @Override
     public void afterTests() {
-        dataProvider.close();
+        probeDataProvider.close();
         super.afterTests();
     }
+
 }

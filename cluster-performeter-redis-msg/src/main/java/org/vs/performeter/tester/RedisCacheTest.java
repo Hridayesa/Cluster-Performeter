@@ -11,6 +11,7 @@ import org.vs.performeter.data.dummy.Msg;
 
 import javax.annotation.Resource;
 import java.util.Random;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * Created by Denis Karpov on 02.12.2016.
@@ -24,6 +25,7 @@ public class RedisCacheTest extends AbstractTester<CollisionStatistics, Collisio
     private DataProvider<Msg> dataProvider;
 
     HashOperations<String, String, Msg> hashOperations;
+    protected static AtomicLong cnt = new AtomicLong();
 
     @Resource(name = "redisTemplate")
     void setHashOperations(RedisTemplate template) {
@@ -33,13 +35,13 @@ public class RedisCacheTest extends AbstractTester<CollisionStatistics, Collisio
     @Override
     public void doSingleTest() {
         statisticsBuilder.countPlusPlus();
-
+        if (cnt.incrementAndGet()%100_000==0){
+            System.out.println(cnt.get());
+        }
         Msg msg = dataProvider.nextData();
-
         if (!hashOperations.putIfAbsent("QQQ", msg.getId(), msg)) {
             statisticsBuilder.collisionPlusPlus();
         }
-
     }
 
 }
