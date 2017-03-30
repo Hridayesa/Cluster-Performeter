@@ -15,7 +15,6 @@ import org.vs.performeter.data.dummy.Msg;
  * Created by Denis Karpov on 02.12.2016.
  */
 @Configuration
-@ConfigurationProperties(prefix = "performeter.infinispan")
 @ComponentScan({"org.vs.performeter.data.providers",
         "org.vs.performeter.data.collision"})
 public class IgniteTesterConfiguration {

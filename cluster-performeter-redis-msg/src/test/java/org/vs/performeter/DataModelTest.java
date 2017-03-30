@@ -27,7 +27,7 @@ public class DataModelTest {
     @Test
     public void testBlob() throws Exception {
         Msg msg = dataProvider.nextData();
-        Assert.assertEquals(504, msg.getBbb().length());
+        Assert.assertEquals(1009, msg.getBbb().length());
         System.out.println(msg.getBbb());
     }
 }
