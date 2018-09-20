@@ -9,7 +9,6 @@ subprojects {
             springBootVersion = '1.4.2.RELEASE'
         }
         repositories {
-//            maven { url "http://msk1-vm-nexus01.unix.nspk.ru:8081/nexus/content/groups/public/" }
             mavenLocal()
             jcenter()
             maven { url "http://repo.maven.apache.org/maven2" }
@@ -36,7 +35,6 @@ subprojects {
     sourceCompatibility = 1.8
 
     repositories {
-//        maven { url "http://msk1-vm-nexus01.unix.nspk.ru:8081/nexus/content/groups/public/" }
         mavenLocal()
         jcenter()
     }
