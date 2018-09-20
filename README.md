@@ -4,7 +4,7 @@ performance and scalability** of your distributed algorithm
 
 ## What it is designed for
 * When you need to choose distributed in-memory storage or something like that
-* When you need to choose deployment topology of you distributed in-memory storage and evaluate 
+* When you need to choose deployment topology of your distributed in-memory storage and evaluate 
 performance and scalability
 * When you need to find the best suited way to use distributed in-memory storage for your business tasks
 
